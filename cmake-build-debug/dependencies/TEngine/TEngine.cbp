@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="TEngine"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\dependencies\;CMake Files\dependencies\TEngine\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TEngine">
+				<Option output="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/libTEngine.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDEBUG_BUILD"/>
+					<Add directory="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src"/>
+					<Add directory="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
+					<Add directory="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TEngine/fast">
+				<Option output="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/libTEngine.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDEBUG_BUILD"/>
+					<Add directory="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src"/>
+					<Add directory="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
+					<Add directory="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/camera.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/camera.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/display.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/display.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/filehelper.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/filehelper.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/framebuffer.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/framebuffer.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/light.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/light.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/lodepng.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/lodepng.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/master.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/mesh.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/mesh.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/model.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/model.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/program.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/program.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/render.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/render.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/tengine_math.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/tengine_math.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/texture.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/texture.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/tinyobj_loader_c.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/utils.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/utils.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/vector.c">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/src/vector.h">
+			<Option target="TEngine"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Eigene Dateien/Programmieren/C/CLion-Workspace/CastleGame3D/dependencies/TEngine/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\dependencies\TEngine\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
