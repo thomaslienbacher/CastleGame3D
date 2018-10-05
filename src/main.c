@@ -4,6 +4,7 @@
 #include "display.h"
 #include "camera.h"
 #include "settings.h"
+#include "player.h"
 
 void cam_control(camera_t *camera) {
     const Uint8 *kb = SDL_GetKeyboardState(NULL);
@@ -43,8 +44,8 @@ void cam_control(camera_t *camera) {
 
 #undef main
 
+#include "defs.h"
 int main(int argc, char** argv) {
-
     settings_t settings;
     settings_default(&settings);
     settings_file(&settings, "data/game.cfg");
@@ -52,10 +53,7 @@ int main(int argc, char** argv) {
     display_t *display = display_new("OpenGL", settings.width, settings.height, settings.fullscreen, settings.renderScale);
     display_set_icon(display, "data/icon.png");
 
-    CLEAR_COLOR[0] = 0.1f;
-    CLEAR_COLOR[1] = 0.1f;
-    CLEAR_COLOR[2] = 0.1f;
-    CLEAR_COLOR[3] = 0.1f;
+    CLEAR_COLOR[0] = CLEAR_COLOR[1] = CLEAR_COLOR[2] = CLEAR_COLOR[3] = 0.1f;
 
     //program
     program_t *program = program_new("data/vertex_shader.glsl", "data/fragment_shader.glsl");
@@ -65,40 +63,55 @@ int main(int argc, char** argv) {
     camera_t *camera = camera_new(settings.fov, (float) display->width / display->height, 0.1f, 200);
 
     //quad_model
-    texture_t *texture = texture_new("data/gun.png", GL_LINEAR, 1);
-    mesh_t *mesh = mesh_newobj("data/gun.obj");
+    texture_t *texture = texture_new("data/gun.png", GL_LINEAR, 16.0f);
+    mesh_t *mesh = mesh_newobj("data/floor.obj");
     model_t *model = model_new(mesh, texture);
+
+    //game vars
+    struct control_s control = {0};
+    control.kb = SDL_GetKeyboardState(NULL);
+
+    player_t player;
+    player_init(&player);
 
     while (display->running) {
         float delta;
         display_prepare(display, &delta, settings.renderScale);
 
+#ifdef DEBUG_BUILD
         char title[100];
         sprintf(title, "OpenGL FPS: %f %f", 1.0f / delta, delta);
         SDL_SetWindowTitle(display->window, title);
+#endif
+        
+        //setting up control data
+        control.delta = delta;
+        control.button = SDL_GetMouseState(&control.mx, &control.my);
 
-        const Uint8 *kb = SDL_GetKeyboardState(NULL);
+        player_control(&player, &control);
 
-        cam_control(camera);
+        //camera lookat
+        //TODO: replace with new tengine functions
+        vec3 sum;
+        vec3_add(sum, player.pos, player.lookat);
+        mat4x4_look_at(camera->viewMat, player.pos, sum, (float[]){0, 1, 0});
+        //vec3_print(player.pos);
+
         mat4x4 projview;
         mat4x4_mul(projview, camera->projMat, camera->viewMat);
         program_unistr_mat(program, "u_projview", projview);
 
         //input
-        if (kb[SDL_SCANCODE_TAB]) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        if (kb[SDL_SCANCODE_ESCAPE]) display->running = 0;
+        if (control.kb[SDL_SCANCODE_ESCAPE]) display->running = 0;
 
-        //render
+        //rendering
         program_use(program);
 
-        for (int x = 0; x < 4; ++x) {
-            for (int y = 0; y < 4; ++y) {
-                for (int z = 0; z < 4; ++z) {
-                    model_mat(model, (float[]){x * 3.4f, y * 3.2f, z * 4}, (float[]){0,0,0}, 0.8f);
-                    program_unistr_mat(program, "u_model", model->mat);
-                    render_model(model);
-                }
+        for (int x = 0; x < 7; ++x) {
+            for (int y = 0; y < 7; ++y) {
+                model_mat(model, (float[]){x * 2.0f, 0, y * 2.0f}, (float[]){0,0,0}, 2.0f);
+                program_unistr_mat(program, "u_model", model->mat);
+                render_model(model);
             }
         }
 
