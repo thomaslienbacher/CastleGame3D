@@ -1,50 +1,14 @@
 #include <render.h>
 #include <program.h>
-#include "master.h"
-#include "display.h"
-#include "camera.h"
+#include <display.h>
+#include <camera.h>
+#include <windows.h>
 #include "settings.h"
 #include "player.h"
-
-void cam_control(camera_t *camera) {
-    const Uint8 *kb = SDL_GetKeyboardState(NULL);
-
-    static float x = 0;
-    static float y = 0;
-    static float z = 0;
-    vec3 pos = {x, y, z};
-    float a = 0.05f;
-    if (kb[SDL_SCANCODE_W]) z -= a;
-    if (kb[SDL_SCANCODE_S]) z += a;
-    if (kb[SDL_SCANCODE_A]) x -= a;
-    if (kb[SDL_SCANCODE_D]) x += a;
-    if (kb[SDL_SCANCODE_Q]) y += a;
-    if (kb[SDL_SCANCODE_E]) y -= a;
-    //printf("pos: %f %f %f\n", x, y, z);
-
-    static float xr = 0;
-    static float yr = 0;
-    static float zr = 0;
-    vec3 rot = {xr, yr, zr};
-    float r = 0.4f;
-    if (kb[SDL_SCANCODE_I]) xr -= r;
-    if (kb[SDL_SCANCODE_K]) xr += r;
-    if (kb[SDL_SCANCODE_J]) yr -= r;
-    if (kb[SDL_SCANCODE_L]) yr += r;
-    if (kb[SDL_SCANCODE_U]) zr += r;
-    if (kb[SDL_SCANCODE_O]) zr -= r;
-    //printf("rot: %f %f %f\n", xr, yr, zr);
-
-    if (kb[SDL_SCANCODE_R]) {
-        xr = yr = zr = 0;
-    }
-
-    camera_view(camera, pos, rot[0], rot[1], rot[2]);
-}
+#include "defs.h"
 
 #undef main
 
-#include "defs.h"
 int main(int argc, char** argv) {
     settings_t settings;
     settings_default(&settings);
@@ -63,18 +27,22 @@ int main(int argc, char** argv) {
     camera_t *camera = camera_new(settings.fov, (float) display->width / display->height, 0.1f, 200);
 
     //quad_model
-    texture_t *texture = texture_new("data/gun.png", GL_LINEAR, 16.0f);
+    texture_t *texture = texture_new("data/gun.png", GL_LINEAR, 4.0f);
     mesh_t *mesh = mesh_newobj("data/floor.obj");
     model_t *model = model_new(mesh, texture);
 
     //game vars
+    SDL_SetWindowGrab(display->window, SDL_TRUE);
+    SDL_ShowCursor(SDL_FALSE);
     struct control_s control = {0};
     control.kb = SDL_GetKeyboardState(NULL);
 
     player_t player;
     player_init(&player);
 
+    int frame = 0;
     while (display->running) {
+        frame++;
         float delta;
         display_prepare(display, &delta, settings.renderScale);
 
@@ -85,17 +53,22 @@ int main(int argc, char** argv) {
 #endif
         
         //setting up control data
+        int lmx = control.mx, lmy = control.my;
         control.delta = delta;
         control.button = SDL_GetMouseState(&control.mx, &control.my);
+        control.dmx = (float)control.mx - lmx;
+        control.dmy = (float)control.my - lmy;
+        if(frame % 10) {
+            if(display->hasFocus)SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
+            control.dmx += display->width / 2.f - control.mx;
+            control.dmy += display->height / 2.f - control.my;
+            control.dmx *= -1;
+        }
 
         player_control(&player, &control);
 
-        //camera lookat
-        //TODO: replace with new tengine functions
-        vec3 sum;
-        vec3_add(sum, player.pos, player.lookat);
-        mat4x4_look_at(camera->viewMat, player.pos, sum, (float[]){0, 1, 0});
-        //vec3_print(player.pos);
+        //camera lookto
+        camera_lookto(camera, player.pos, player.lookto);
 
         mat4x4 projview;
         mat4x4_mul(projview, camera->projMat, camera->viewMat);
@@ -107,9 +80,9 @@ int main(int argc, char** argv) {
         //rendering
         program_use(program);
 
-        for (int x = 0; x < 7; ++x) {
-            for (int y = 0; y < 7; ++y) {
-                model_mat(model, (float[]){x * 2.0f, 0, y * 2.0f}, (float[]){0,0,0}, 2.0f);
+        for (int x = -5; x < 5; ++x) {
+            for (int y = -5; y < 5; ++y) {
+                model_mat(model, (float[]){x * 3.0f, -1, y * 3.0f}, (float[]){0,0,0}, 3.0f);
                 program_unistr_mat(program, "u_model", model->mat);
                 render_model(model);
             }

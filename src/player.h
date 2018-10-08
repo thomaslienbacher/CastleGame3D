@@ -14,7 +14,7 @@
 typedef struct _player_s {
     vec3 pos;
     vec3 vel;
-    vec3 lookat;
+    vec3 lookto;
 } player_t;
 
 void player_init(player_t *player);

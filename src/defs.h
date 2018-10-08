@@ -12,6 +12,8 @@ struct control_s {
     const Uint8 *kb;//keyboard
     int mx;//mouse x
     int my;//mouse y
+    float dmx;//delta mouse x since last frame still and int
+    float dmy;//            y
     Uint32 button;//mouse button mask
 };
 

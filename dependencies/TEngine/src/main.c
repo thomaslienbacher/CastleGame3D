@@ -981,8 +981,27 @@ void frustum_testing() {//display
     display_free(display);
 }
 
+void check_bug_fixes() {
+    //vector norm len = 0 bug
+    vec3 v = {0, 1, 1};
+    vec3_print(v);
+    vec3_norm(v, v);
+    vec3_print(v);
+
+    //vec rotate
+    puts("");
+    vec2 rot = {1, 0};
+    vec2_print(rot);
+    for (int i = 0; i < 8; ++i) {
+        vec2_rot(rot, rot, 45 * DEG_2_RAD);
+        vec2_print(rot);
+    }
+    vec2_print(rot);
+
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdParam, int iCmdShow) {
-    frustum_testing();
+    check_bug_fixes();
 
     return 0;
 }
