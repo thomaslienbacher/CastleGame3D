@@ -9,12 +9,13 @@
 #include <SDL2/SDL.h>
 #include "defs.h"
 
-#define PLAYER_SPEED 2
+#define PLAYER_SPEED 4.0f
+#define PLAYER_LOOK_SPEED 1.5f
 
 typedef struct _player_s {
     vec3 pos;
     vec3 vel;
-    vec3 lookto;
+    float pitch, yaw;
 } player_t;
 
 void player_init(player_t *player);

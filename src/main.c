@@ -26,13 +26,19 @@ int main(int argc, char** argv) {
     //camera
     camera_t *camera = camera_new(settings.fov, (float) display->width / display->height, 0.1f, 200);
 
-    //quad_model
-    texture_t *texture = texture_new("data/gun.png", GL_LINEAR, 4.0f);
-    mesh_t *mesh = mesh_newobj("data/floor.obj");
-    model_t *model = model_new(mesh, texture);
+    //model
+    texture_t *floorTex = texture_new("data/floor.png", GL_LINEAR, 4.0f);
+    mesh_t *floorMesh = mesh_newobj("data/floor.obj");
+    model_t *floor = model_new(floorMesh, floorTex);
+
+    texture_t *skyboxTex = texture_new("data/skybox_blurred.png", GL_LINEAR, 1.0f);
+    texture_wrap(skyboxTex, GL_CLAMP_TO_EDGE);
+    mesh_t *skyboxMesh = mesh_newobj("data/cube.obj");
+    model_t *skybox = model_new(skyboxMesh, skyboxTex);
+    model_mat(skybox, (float[]){0, 10, 0}, VEC3_ZERO, 45.0f);
 
     //game vars
-    SDL_SetWindowGrab(display->window, SDL_TRUE);
+    if(display->hasFocus) SDL_SetWindowGrab(display->window, SDL_TRUE);
     SDL_ShowCursor(SDL_FALSE);
     struct control_s control = {0};
     control.kb = SDL_GetKeyboardState(NULL);
@@ -58,17 +64,15 @@ int main(int argc, char** argv) {
         control.button = SDL_GetMouseState(&control.mx, &control.my);
         control.dmx = (float)control.mx - lmx;
         control.dmy = (float)control.my - lmy;
-        if(frame % 10) {
-            if(display->hasFocus)SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
-            control.dmx += display->width / 2.f - control.mx;
-            control.dmy += display->height / 2.f - control.my;
-            control.dmx *= -1;
-        }
+        if(display->hasFocus) SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
+        control.dmx += display->width / 2.f - control.mx;
+        control.dmy += display->height / 2.f - control.my;
+        control.dmx *= -1;
 
         player_control(&player, &control);
 
         //camera lookto
-        camera_lookto(camera, player.pos, player.lookto);
+        camera_view(camera, player.pos, player.pitch, player.yaw);
 
         mat4x4 projview;
         mat4x4_mul(projview, camera->projMat, camera->viewMat);
@@ -82,18 +86,29 @@ int main(int argc, char** argv) {
 
         for (int x = -5; x < 5; ++x) {
             for (int y = -5; y < 5; ++y) {
-                model_mat(model, (float[]){x * 3.0f, -1, y * 3.0f}, (float[]){0,0,0}, 3.0f);
-                program_unistr_mat(program, "u_model", model->mat);
-                render_model(model);
+                model_mat(floor, (float[]){x * 6.0f, -1, y * 6.0f}, (float[]){0,0,0}, 6.0f);
+                program_unistr_mat(program, "u_model", floor->mat);
+                render_model(floor);
             }
         }
+
+        //lastly render skybox
+        glDisable(GL_CULL_FACE);
+
+        program_unistr_mat(program, "u_model", skybox->mat);
+        render_model(skybox);//TODO: create own shader
+
+        glEnable(GL_CULL_FACE);
 
         display_show(display);
     }
 
-    model_free(model);
-    mesh_free(mesh);
-    texture_free(texture);
+    model_free(floor);
+    mesh_free(floorMesh);
+    texture_free(floorTex);
+    model_free(skybox);
+    mesh_free(skyboxMesh);
+    texture_free(skyboxTex);
     camera_free(camera);
     program_free(program);
     display_free(display);
