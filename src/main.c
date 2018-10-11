@@ -20,8 +20,8 @@ int main(int argc, char** argv) {
     CLEAR_COLOR[0] = CLEAR_COLOR[1] = CLEAR_COLOR[2] = CLEAR_COLOR[3] = 0.2f;
 
     //program
-    program_t *program = program_new("data/vertex_shader.glsl", "data/fragment_shader.glsl");
-    program_use(program);
+    program_t *commonProg = program_new("data/common_vs.glsl", "data/common_fs.glsl");
+    program_t *skyboxProg = program_new("data/skybox_vs.glsl", "data/skybox_fs.glsl");
 
     //camera
     camera_t *camera = camera_new(settings.fov, (float) display->width / display->height, 0.1f, 200);
@@ -36,6 +36,7 @@ int main(int argc, char** argv) {
     mesh_t *skyboxMesh = mesh_newobj("data/cube.obj");
     model_t *skybox = model_new(skyboxMesh, skyboxTex);
     model_mat(skybox, (float[]){0, 10, 0}, VEC3_ZERO, 45.0f);
+    program_unistr_mat(skyboxProg, "u_model", skybox->mat);
 
     //game vars
     if(display->hasFocus) SDL_SetWindowGrab(display->window, SDL_TRUE);
@@ -62,8 +63,8 @@ int main(int argc, char** argv) {
         int lmx = control.mx, lmy = control.my;
         control.delta = delta;
         control.button = SDL_GetMouseState(&control.mx, &control.my);
-        control.dmx = (float)control.mx - lmx;
-        control.dmy = (float)control.my - lmy;
+        control.dmx = (float) control.mx - lmx;
+        control.dmy = (float) control.my - lmy;
         if(display->hasFocus) SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
         control.dmx += display->width / 2.f - control.mx;
         control.dmy += display->height / 2.f - control.my;
@@ -76,18 +77,20 @@ int main(int argc, char** argv) {
 
         mat4x4 projview;
         mat4x4_mul(projview, camera->projMat, camera->viewMat);
-        program_unistr_mat(program, "u_projview", projview);
+        program_unistr_mat(commonProg, "u_projview", projview);
+        program_unistr_mat(skyboxProg, "u_view", camera->viewMat);
+        program_unistr_mat(skyboxProg, "u_proj", camera->projMat);
 
         //input
         if (control.kb[SDL_SCANCODE_ESCAPE]) display->running = 0;
 
         //rendering
-        program_use(program);
+        program_use(commonProg);
 
         for (int x = -5; x < 5; ++x) {
             for (int y = -5; y < 5; ++y) {
                 model_mat(floor, (float[]){x * 6.0f, -1, y * 6.0f}, (float[]){0,0,0}, 6.0f);
-                program_unistr_mat(program, "u_model", floor->mat);
+                program_unistr_mat(commonProg, "u_model", floor->mat);
                 render_model(floor);
             }
         }
@@ -95,8 +98,8 @@ int main(int argc, char** argv) {
         //lastly render skybox
         glDisable(GL_CULL_FACE);
 
-        program_unistr_mat(program, "u_model", skybox->mat);
-        render_model(skybox);//TODO: create own shader
+        program_use(skyboxProg);
+        render_model(skybox);
 
         glEnable(GL_CULL_FACE);
 
@@ -110,7 +113,7 @@ int main(int argc, char** argv) {
     mesh_free(skyboxMesh);
     texture_free(skyboxTex);
     camera_free(camera);
-    program_free(program);
+    program_free(commonProg);
     display_free(display);
 
     return 0;
