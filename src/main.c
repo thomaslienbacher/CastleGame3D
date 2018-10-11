@@ -89,7 +89,7 @@ int main(int argc, char** argv) {
 
         for (int x = -5; x < 5; ++x) {
             for (int y = -5; y < 5; ++y) {
-                model_mat(floor, (float[]){x * 6.0f, -1, y * 6.0f}, (float[]){0,0,0}, 6.0f);
+                model_mat(floor, (float[]){x * 6.0f, 0, y * 6.0f}, (float[]){0,0,0}, 6.0f);
                 program_unistr_mat(commonProg, "u_model", floor->mat);
                 render_model(floor);
             }
@@ -97,10 +97,8 @@ int main(int argc, char** argv) {
 
         //lastly render skybox
         glDisable(GL_CULL_FACE);
-
         program_use(skyboxProg);
         render_model(skybox);
-
         glEnable(GL_CULL_FACE);
 
         display_show(display);

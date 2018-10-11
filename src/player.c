@@ -8,7 +8,7 @@
 
 void player_init(player_t *player) {
     memset(player, 0, sizeof(player_t));
-    vec3_set(player->pos, 0, 1, 0);
+    vec3_set(player->pos, 0, 2, 0);
 }
 
 void player_control(player_t *player, struct control_s *control) {
