@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     display_t *display = display_new("OpenGL", settings.width, settings.height, settings.fullscreen, settings.renderScale);
     display_set_icon(display, "data/icon.png");
 
-    CLEAR_COLOR[0] = CLEAR_COLOR[1] = CLEAR_COLOR[2] = CLEAR_COLOR[3] = 0.1f;
+    CLEAR_COLOR[0] = CLEAR_COLOR[1] = CLEAR_COLOR[2] = CLEAR_COLOR[3] = 0.2f;
 
     //program
     program_t *program = program_new("data/vertex_shader.glsl", "data/fragment_shader.glsl");

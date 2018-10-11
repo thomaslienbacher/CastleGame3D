@@ -11,6 +11,7 @@
 
 #define PLAYER_SPEED 4.0f
 #define PLAYER_LOOK_SPEED 1.5f
+#define PLAYER_MAX_PITCH 85
 
 typedef struct _player_s {
     vec3 pos;

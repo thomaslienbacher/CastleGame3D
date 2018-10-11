@@ -15,8 +15,8 @@ void player_control(player_t *player, struct control_s *control) {
     player->yaw += control->dmx * control->delta * PLAYER_LOOK_SPEED;
     player->pitch -= control->dmy * control->delta * PLAYER_LOOK_SPEED;
 
-    if(player->pitch > 80) player->pitch = 80;
-    if(player->pitch < -80) player->pitch = -80;
+    if(player->pitch > PLAYER_MAX_PITCH) player->pitch = PLAYER_MAX_PITCH;
+    if(player->pitch < -PLAYER_MAX_PITCH) player->pitch = -PLAYER_MAX_PITCH;
 
     vec3 move = {0};
 
@@ -26,7 +26,7 @@ void player_control(player_t *player, struct control_s *control) {
     move[2] += control->kb[SDL_SCANCODE_D];
 
     vec3_norm(move, move);
-    float2_rot(move, move+2, player->yaw * DEG_2_RAD - M_PI_2);//TODO: replace with tengine pi constant
+    float2_rot(move, move+2, player->yaw * DEG_2_RAD - FM_PI_2);
     vec3_scale(move, move, PLAYER_SPEED * control->delta);
 
     vec3_add(player->pos, player->pos, move);
