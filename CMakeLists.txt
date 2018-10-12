@@ -19,9 +19,10 @@ elseif(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     add_definitions("-DDEBUG_BUILD")
 endif()
 
+set(TENGINE_BUILD_USAGE Library)
 add_subdirectory(dependencies/TEngine)
 
-set(SOURCE_FILES src/main.c src/settings.c src/settings.h src/player.c src/player.h src/defs.h)
+set(SOURCE_FILES src/main.c src/settings.c src/settings.h src/player.c src/player.h src/defs.h src/game.c src/game.h)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_link_libraries(${PROJECT_NAME} TEngine)

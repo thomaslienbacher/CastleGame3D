@@ -9,12 +9,13 @@
 
 #undef main
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     settings_t settings;
     settings_default(&settings);
     settings_file(&settings, "data/game.cfg");
 
-    display_t *display = display_new("OpenGL", settings.width, settings.height, settings.fullscreen, settings.renderScale);
+    display_t *display = display_new("OpenGL", settings.width, settings.height, settings.fullscreen,
+                                     settings.renderScale, settings.vsync);
     display_set_icon(display, "data/icon.png");
 
     CLEAR_COLOR[0] = CLEAR_COLOR[1] = CLEAR_COLOR[2] = CLEAR_COLOR[3] = 0.2f;
@@ -35,11 +36,11 @@ int main(int argc, char** argv) {
     texture_wrap(skyboxTex, GL_CLAMP_TO_EDGE);
     mesh_t *skyboxMesh = mesh_newobj("data/cube.obj");
     model_t *skybox = model_new(skyboxMesh, skyboxTex);
-    model_mat(skybox, (float[]){0, 10, 0}, VEC3_ZERO, 45.0f);
+    model_mat(skybox, (float[]) {0, 10, 0}, VEC3_ZERO, 100.0f);
     program_unistr_mat(skyboxProg, "u_model", skybox->mat);
 
     //game vars
-    if(display->hasFocus) SDL_SetWindowGrab(display->window, SDL_TRUE);
+    if (display->hasFocus) SDL_SetWindowGrab(display->window, SDL_TRUE);
     SDL_ShowCursor(SDL_FALSE);
     struct control_s control = {0};
     control.kb = SDL_GetKeyboardState(NULL);
@@ -47,9 +48,7 @@ int main(int argc, char** argv) {
     player_t player;
     player_init(&player);
 
-    int frame = 0;
     while (display->running) {
-        frame++;
         float delta;
         display_prepare(display, &delta, settings.renderScale);
 
@@ -58,14 +57,14 @@ int main(int argc, char** argv) {
         sprintf(title, "OpenGL FPS: %f %f", 1.0f / delta, delta);
         SDL_SetWindowTitle(display->window, title);
 #endif
-        
+
         //setting up control data
         int lmx = control.mx, lmy = control.my;
         control.delta = delta;
         control.button = SDL_GetMouseState(&control.mx, &control.my);
         control.dmx = (float) control.mx - lmx;
         control.dmy = (float) control.my - lmy;
-        if(display->hasFocus) SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
+        if (display->hasFocus) SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
         control.dmx += display->width / 2.f - control.mx;
         control.dmy += display->height / 2.f - control.my;
         control.dmx *= -1;
@@ -80,21 +79,18 @@ int main(int argc, char** argv) {
         program_unistr_mat(commonProg, "u_projview", projview);
         program_unistr_mat(skyboxProg, "u_view", camera->viewMat);
         program_unistr_mat(skyboxProg, "u_proj", camera->projMat);
+        program_unistr_f(commonProg, "u_uvscale", 1.0f);
 
         //input
         if (control.kb[SDL_SCANCODE_ESCAPE]) display->running = 0;
 
-        //rendering
+        //render floor
         program_use(commonProg);
-
-        for (int x = -5; x < 5; ++x) {
-            for (int y = -5; y < 5; ++y) {
-                model_mat(floor, (float[]){x * 6.0f, 0, y * 6.0f}, (float[]){0,0,0}, 6.0f);
-                program_unistr_mat(commonProg, "u_model", floor->mat);
-                render_model(floor);
-            }
-        }
-
+        model_mat(floor, (float[]){-0.5f * 100.0f, 1, 0.5f * 100.f}, VEC3_ZERO, 100.0f);
+        program_unistr_mat(commonProg, "u_model", floor->mat);
+        program_unistr_f(commonProg, "u_uvscale", 30.0f);
+        render_model(floor);
+        
         //lastly render skybox
         glDisable(GL_CULL_FACE);
         program_use(skyboxProg);

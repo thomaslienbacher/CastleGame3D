@@ -15,6 +15,7 @@ typedef struct _settings_s {
     float renderScale;
     char fullscreen;
     float fov;
+    char vsync;
 } settings_t;
 
 void settings_default(settings_t *settings);

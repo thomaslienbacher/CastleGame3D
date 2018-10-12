@@ -20,10 +20,9 @@ static void debug_msg_callback(GLenum source, GLenum type, GLuint id,
     }
 }
 
-display_t *display_new(const char *title, int width, int height, char fullscreen, float renderScale) {
+display_t *display_new(const char *title, int width, int height, char fullscreen, float renderScale, char vsync) {
     display_t* display = calloc(1, sizeof(display_t));
     display->running = 1;
-    display->hasFocus = 1;
     display->lastTick = 0;
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
@@ -39,6 +38,8 @@ display_t *display_new(const char *title, int width, int height, char fullscreen
 #ifdef DEBUG_BUILD
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_RELEASE_BEHAVIOR, 0);
+#elif
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_RELEASE_BEHAVIOR, 1);
 #endif
 
     Uint32 flags = SDL_WINDOW_OPENGL | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
@@ -56,7 +57,7 @@ display_t *display_new(const char *title, int width, int height, char fullscreen
     display->glContext = SDL_GL_CreateContext(display->window);
 
     SDL_GL_MakeCurrent(display->window, display->glContext);
-    SDL_GL_SetSwapInterval(1); // vsync
+    SDL_GL_SetSwapInterval(vsync); // vsync
 
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();

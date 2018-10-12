@@ -16,6 +16,7 @@ uniform float u_instanced = 0;
 uniform mat4 u_model;
 uniform mat4 u_projview;
 uniform vec3 u_lightpositions[c_numLights];
+uniform float u_uvscale;
 
 out vec2 v_texcoord;
 out vec3 v_normal;
@@ -37,7 +38,7 @@ void main() {
     }
 
     gl_Position = u_projview * worldPos;
-    v_texcoord = i_texcoord;
+    v_texcoord = i_texcoord * u_uvscale;
 
 
     for(int i = 0; i < c_numLights; i++){

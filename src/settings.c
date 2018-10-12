@@ -14,6 +14,7 @@ void settings_default(settings_t *settings) {
     settings->renderScale = 1.0f;
     settings->fullscreen = 1;
     settings->fov = 80;
+    settings->vsync = 1;
 }
 
 //:TODO: maybe remove code repetition
@@ -46,6 +47,10 @@ void settings_file(settings_t *settings, const char *filename) {
         if(!strcmp(key, "FOV")) {
             float i = strtof(value, (char**)NULL);
             if(i) settings->fov = i;
+        }
+        if(!strcmp(key, "VSYNC")) {
+            int i = strtol(value, (char**)NULL, 10);
+            if(i || (value[0] == '0')) settings->vsync = (char)i;
         }
     }
 
