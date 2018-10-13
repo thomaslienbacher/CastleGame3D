@@ -40,34 +40,43 @@ int main(int argc, char **argv) {
     program_unistr_mat(skyboxProg, "u_model", skybox->mat);
 
     //game vars
-    if (display->hasFocus) SDL_SetWindowGrab(display->window, SDL_TRUE);
-    SDL_ShowCursor(SDL_FALSE);
+    SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
     struct control_s control = {0};
     control.kb = SDL_GetKeyboardState(NULL);
 
     player_t player;
     player_init(&player);
 
+    char firstFrame = 1;
+
     while (display->running) {
         float delta;
         display_prepare(display, &delta, settings.renderScale);
 
-#ifdef DEBUG_BUILD
-        char title[100];
-        sprintf(title, "OpenGL FPS: %f %f", 1.0f / delta, delta);
-        SDL_SetWindowTitle(display->window, title);
-#endif
+        if(firstFrame) {
+            SDL_GetMouseState(NULL, NULL);//eat movement event
+            firstFrame = 0;
+            continue;
+        }
 
         //setting up control data
-        int lmx = control.mx, lmy = control.my;
-        control.delta = delta;
-        control.button = SDL_GetMouseState(&control.mx, &control.my);
-        control.dmx = (float) control.mx - lmx;
-        control.dmy = (float) control.my - lmy;
-        if (display->hasFocus) SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
-        control.dmx += display->width / 2.f - control.mx;
-        control.dmy += display->height / 2.f - control.my;
-        control.dmx *= -1;
+        if (display->hasFocus) {
+            SDL_ShowCursor(SDL_FALSE);
+            control.delta = delta;
+            int lmx = control.mx, lmy = control.my;
+            control.button = SDL_GetMouseState(&control.mx, &control.my);
+            control.dmx = (float) control.mx - lmx;
+            control.dmy = (float) control.my - lmy;
+            SDL_WarpMouseInWindow(display->window, display->width / 2, display->height / 2);
+            control.dmx += display->width / 2.f - control.mx;
+            control.dmy += display->height / 2.f - control.my;
+            control.dmx *= -1;
+        }
+        else {
+            SDL_ShowCursor(SDL_TRUE);
+            control.delta = control.dmx = control.dmy = 0;
+            control.button = 0;
+        }
 
         player_control(&player, &control);
 
@@ -90,12 +99,18 @@ int main(int argc, char **argv) {
         program_unistr_mat(commonProg, "u_model", floor->mat);
         program_unistr_f(commonProg, "u_uvscale", 30.0f);
         render_model(floor);
-        
+
         //lastly render skybox
         glDisable(GL_CULL_FACE);
         program_use(skyboxProg);
         render_model(skybox);
         glEnable(GL_CULL_FACE);
+
+#ifdef DEBUG_BUILD
+        char title[100];
+        sprintf(title, "OpenGL FPS: %f %f", 1.0f / delta, delta);
+        SDL_SetWindowTitle(display->window, title);
+#endif
 
         display_show(display);
     }
