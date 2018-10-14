@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     texture_wrap(skyboxTex, GL_CLAMP_TO_EDGE);
     mesh_t *skyboxMesh = mesh_newobj("data/cube.obj");
     model_t *skybox = model_new(skyboxMesh, skyboxTex);
-    model_mat(skybox, (float[]) {0, 10, 0}, VEC3_ZERO, 100.0f);
+    model_transform(skybox, (float[]) {0, 10, 0}, VEC3_ZERO, 100.0f);
     program_unistr_mat(skyboxProg, "u_model", skybox->mat);
 
     //game vars
@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
 
         //render floor
         program_use(commonProg);
-        model_mat(floor, (float[]){-0.5f * 100.0f, 1, 0.5f * 100.f}, VEC3_ZERO, 100.0f);
+        model_transform(floor, (float[]){-0.5f * 100.0f, 1, 0.5f * 100.f}, VEC3_ZERO, 100.0f);
         program_unistr_mat(commonProg, "u_model", floor->mat);
         program_unistr_f(commonProg, "u_uvscale", 30.0f);
         render_model(floor);

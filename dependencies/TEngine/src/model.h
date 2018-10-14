@@ -35,15 +35,15 @@ typedef struct _inst_model_s {
 typedef struct _quad_model_s {
     quad_t* quad;
     texture_t* texture;
-    vec4 dim;//x, y, width, height
+    vec4 dim;//x, y, xadvance, height
     float rot;
 } quad_model_t;
 
 model_t* model_new(mesh_t* mesh, texture_t* texture);
-void model_mat(model_t* model, const vec3 pos, const vec3 rot, float scale);
-void model_mat_as(model_t* model, const vec3 pos, const vec3 rot, const vec3 scale);
-void model_matd(mat4x4 mat, const vec3 pos, const vec3 rot, float scale);
-void model_matd_as(mat4x4 mat, const vec3 pos, const vec3 rot, const vec3 scale);
+void model_transform(model_t *model, const vec3 pos, const vec3 rot, float scale);
+void model_transform_as(model_t *model, const vec3 pos, const vec3 rot, const vec3 scale);
+void model_transformd(mat4x4 mat, const vec3 pos, const vec3 rot, float scale);
+void model_transformd_as(mat4x4 mat, const vec3 pos, const vec3 rot, const vec3 scale);
 void model_free(model_t* model);
 
 inst_model_t* inst_model_new(mesh_t* mesh, texture_t* texture, int count);

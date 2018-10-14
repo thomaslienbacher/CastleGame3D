@@ -11,6 +11,7 @@
 #include "light.h"
 #include "vector.h"
 #include "frustum.h"
+#include "text.h"
 
 #ifdef  __REMOVE_FROM_COMPILATION__
 
@@ -603,7 +604,7 @@ void test_new_viewport() {
     program_use(program);
 
     //camera
-    camera_t *camera = camera_new(80, (float) display->width / display->height, 0.1f, 200);
+    camera_t *camera = camera_new(80, (float) display->xadvance / display->height, 0.1f, 200);
 
     //quad_model
     texture_t *texture = texture_new("data/gun.png", GL_NEAREST, 1);
@@ -735,7 +736,7 @@ void test_tex_wrap() {
     program_use(program);
 
     //camera
-    camera_t *camera = camera_new(80, (float) display->width / display->height, 0.1f, 200);
+    camera_t *camera = camera_new(80, (float) display->xadvance / display->height, 0.1f, 200);
 
     //quad_model
     texture_t *texture = texture_new("data/gun.png", GL_NEAREST, 1);
@@ -812,7 +813,7 @@ void quad_testing() {
     program_use(program);
 
     //camera
-    camera_t *camera = camera_new(80, (float) display->width / display->height, 0.1f, 200);
+    camera_t *camera = camera_new(80, (float) display->xadvance / display->height, 0.1f, 200);
 
     //quad_model
     texture_t *texture = texture_new("data/large.png", GL_NEAREST, 1);
@@ -874,7 +875,7 @@ void frustum_testing() {//display
     program_use(program);
 
     //camera
-    camera_t *camera = camera_new(80, (float) display->width / display->height, 0.1f, 200);
+    camera_t *camera = camera_new(80, (float) display->xadvance / display->height, 0.1f, 200);
 
     //quad_model
     texture_t *texture = texture_new("data/gun.png", GL_NEAREST, 1);
@@ -1012,7 +1013,7 @@ void test_camera_lookto() {
     program_use(program);
 
     //camera
-    camera_t *camera = camera_new(80, (float) display->width / display->height, 0.5f, 200);
+    camera_t *camera = camera_new(80, (float) display->xadvance / display->height, 0.5f, 200);
 
     //quad_model
     texture_t *texture = texture_new("data/gun.png", GL_NEAREST, 1);
@@ -1184,7 +1185,7 @@ void test_new_camera_and_all_axis_scaling() {
                 vec3 p = {x * 4.f, -2, z * 4.f};
 
                 if (frustum_issphere(frustum, p, 1.0f)) {
-                    model_matd_as(model->mat, p, (float[]) {0, 0, 0}, (float[]) {sin,cos,sin*cos});
+                    model_transformd_as(model->mat, p, (float[]) {0, 0, 0}, (float[]) {sin, cos, sin * cos});
                     program_unistr_mat(program, "u_model", model->mat);
                     render_model(model);
                 }
@@ -1203,9 +1204,83 @@ void test_new_camera_and_all_axis_scaling() {
     display_free(display);
 }
 
+void test_text_rendering() {
+    const int WIDTH = 900;
+    const int HEIGHT = 900;
+    float renderSize = 1.0f;
+    display_t *display = display_new("OpenGL", WIDTH, HEIGHT, 0, renderSize, 1);
+    display_set_icon(display, "data/icon.png");
+
+    CLEAR_COLOR[0] = CLEAR_COLOR[1] = CLEAR_COLOR[2] = CLEAR_COLOR[3] = 0.3f;
+
+    //program
+    program_t *program = program_new("data/font_vs.glsl", "data/font_fs.glsl");
+    program_use(program);
+
+    //font
+    font_t *fontA = font_new("data/consolas_32.csv", "data/consolas_32.png", FONT_DEFAULT_SCALAR);
+    font_t *fontB = font_new("data/franklingb_44.csv", "data/franklingb_44.png", FONT_DEFAULT_SCALAR);
+    font_t *fontC = font_new("data/harrington_55.csv", "data/harrington_55.png", FONT_DEFAULT_SCALAR);
+    //font_t *fontC = font_new("data/broadway_46.csv", "data/broadway_46.png", FONT_DEFAULT_SCALAR);
+
+    //text
+    text_t* textA = text_new(fontA, "A Thomas 3245 _:;-$o");
+    text_t* textB = text_new(fontB, "B Thomas 3245 _:;-$o");
+    text_t* textC = text_new(fontC, "C Thomas 3245 _:;-$o");
+
+    while (display->running) {
+        float delta;
+        display_prepare(display, &delta, renderSize);
+
+        char title[100];
+        sprintf(title, "OpenGL FPS: %f %f", 1.0f / delta, delta);
+        SDL_SetWindowTitle(display->window, title);
+
+        const Uint8 *kb = SDL_GetKeyboardState(NULL);
+
+        //input
+        if (kb[SDL_SCANCODE_TAB]) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        if (kb[SDL_SCANCODE_ESCAPE]) display->running = 0;
+
+        //render
+        program_use(program);
+
+        static float time = 0;
+        time += delta;
+
+        float scale = clampf(sinf(time * 2) + 1, 0.5, 1.5);
+
+        text_transform(textA, (float[]) {-textA->width / 2 * scale, 0.3}, scale);
+        text_transform(textB, (float[]) {-textB->width / 2 * scale, 0}, scale);
+        text_transform(textC, (float[]) {-textC->width / 2 * scale, -0.3f}, scale);
+
+        //render text
+        program_unistr_mat(program, "u_transform", textA->mat);
+        render_text(textA);
+
+        program_unistr_mat(program, "u_transform", textB->mat);
+        render_text(textB);
+
+        program_unistr_mat(program, "u_transform", textC->mat);
+        render_text(textC);
+
+        display_show(display);
+    }
+
+    text_free(textA);
+    text_free(textB);
+    text_free(textC);
+    font_free(fontA);
+    font_free(fontB);
+    font_free(fontC);
+    program_free(program);
+    display_free(display);
+}
+
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdParam, int iCmdShow) {
-    test_new_camera_and_all_axis_scaling();
+    test_text_rendering();
 
     return 0;
 }
