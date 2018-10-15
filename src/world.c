@@ -26,7 +26,7 @@ void world_init() {
     texture_wrap(world.wallTex, GL_MIRRORED_REPEAT);
     world.wallMesh = mesh_newobj("data/wall.obj");
     world.wall = model_new(world.wallMesh, world.wallTex);
-    model_transform_as(world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE-15, 10, WORLD_SIZE-15});
+    model_transform_as(world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE-15, 10, WORLD_SIZE-15});//TODO: remove 15 hard coded
 }
 
 void world_render() {
@@ -43,7 +43,7 @@ void world_render() {
 
     program_use(g_commonProg);
     program_unistr_mat(g_commonProg, "u_model", world.wall->mat);
-    program_unistr_vec3(g_commonProg, "u_uvscale", (float[]) {3.0f, 1.0f, .0f});
+    program_unistr_vec3(g_commonProg, "u_uvscale", (float[]) {4.0f, 1.0f, .0f});
     render_model(world.wall);
 
     glEnable(GL_CULL_FACE);
