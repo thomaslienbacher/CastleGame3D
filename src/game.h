@@ -5,11 +5,9 @@
 #ifndef CASTLEGAME3D_GAME_H
 #define CASTLEGAME3D_GAME_H
 
-enum gamestate_e {
-    BEGINNING,
-    LEVEL
-};
+typedef struct _world_s {
 
-extern enum gamestate_e g_gamestate;
+} world_t;
+
 
 #endif //CASTLEGAME3D_GAME_H

@@ -4,4 +4,3 @@
 
 #include "game.h"
 
-enum gamestate_e g_gamestate = BEGINNING;
