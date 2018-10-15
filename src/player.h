@@ -19,6 +19,8 @@ typedef struct _player_s {
     float pitch, yaw;
 } player_t;
 
+extern player_t player;
+
 void player_init(player_t *player);
 void player_control(player_t *player, struct control_s *control);
 

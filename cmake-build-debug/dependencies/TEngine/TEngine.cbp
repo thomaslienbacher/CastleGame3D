@@ -28,10 +28,9 @@
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine"/>
@@ -51,10 +50,9 @@
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine/fast"/>

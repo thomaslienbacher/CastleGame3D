@@ -28,10 +28,9 @@
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-release/Makefile&quot;  VERBOSE=1 CastleGame3D"/>
@@ -51,10 +50,9 @@
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-release/Makefile&quot;  VERBOSE=1 CastleGame3D/fast"/>
@@ -94,10 +92,9 @@
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-release/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine"/>
@@ -117,10 +114,9 @@
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../mingw32/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-release/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine/fast"/>
@@ -232,7 +228,16 @@
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src/vector.h">
 			<Option target="TEngine"/>
 		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/defs.c">
+			<Option target="CastleGame3D"/>
+		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/defs.h">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/engine.c">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/engine.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/game.c">
@@ -254,6 +259,12 @@
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/settings.h">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/world.c">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/world.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/CMakeLists.txt">

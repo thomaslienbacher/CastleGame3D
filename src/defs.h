@@ -17,4 +17,6 @@ struct control_s {
     Uint32 button;//mouse button mask
 };
 
+extern struct control_s g_control;
+
 #endif //CASTLEGAME3D_DEFS_H

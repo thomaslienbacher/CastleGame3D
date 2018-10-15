@@ -18,7 +18,8 @@ typedef struct _settings_s {
     char vsync;
 } settings_t;
 
-void settings_default(settings_t *settings);
-void settings_file(settings_t *settings, const char *filename);
+extern settings_t g_settings;
+
+void settings_load(const char *filename);
 
 #endif //CASTLEGAME3D_SETTINGS_H

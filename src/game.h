@@ -5,9 +5,15 @@
 #ifndef CASTLEGAME3D_GAME_H
 #define CASTLEGAME3D_GAME_H
 
-typedef struct _world_s {
+#include "defs.h"
+#include "world.h"
+#include "player.h"
+#include "settings.h"
 
-} world_t;
+void game_init();
+void game_update();
+void game_render();
+void game_quit();
 
 
 #endif //CASTLEGAME3D_GAME_H

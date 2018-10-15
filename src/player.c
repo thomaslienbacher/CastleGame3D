@@ -6,8 +6,9 @@
 #include <mem.h>
 #include "player.h"
 
+player_t player;
+
 void player_init(player_t *player) {
-    memset(player, 0, sizeof(player_t));
     vec3_set(player->pos, 0, 2, 0);
 }
 

@@ -8,17 +8,16 @@
 #include <filehelper.h>
 #include <string.h>
 
-void settings_default(settings_t *settings) {
-    settings->width = 400;
-    settings->height = 320;
-    settings->renderScale = 1.0f;
-    settings->fullscreen = 1;
-    settings->fov = 80;
-    settings->vsync = 1;
-}
+settings_t g_settings;
 
-//:TODO: maybe remove code repetition
-void settings_file(settings_t *settings, const char *filename) {
+void settings_load(const char *filename) {
+    g_settings.width = 400;
+    g_settings.height = 320;
+    g_settings.renderScale = 1.0f;
+    g_settings.fullscreen = 1;
+    g_settings.fov = 80;
+    g_settings.vsync = 1;
+
     FILE *file = fadv_open(filename, "r");
 
     char key[256];
@@ -30,27 +29,27 @@ void settings_file(settings_t *settings, const char *filename) {
 
         if(!strcmp(key, "WIDTH")) {
             int i = strtol(value, (char**)NULL, 10);
-            if(i) settings->width = i;
+            if(i) g_settings.width = i;
         }
         if(!strcmp(key, "HEIGHT")) {
             int i = strtol(value, (char**)NULL, 10);
-            if(i) settings->height = i;
+            if(i) g_settings.height = i;
         }
         if(!strcmp(key, "RENDERSCALE")) {
             float i = strtof(value, (char**)NULL);
-            if(i) settings->renderScale = i;
+            if(i) g_settings.renderScale = i;
         }
         if(!strcmp(key, "FULLSCREEN")) {
             int i = strtol(value, (char**)NULL, 10);
-            if(i || (value[0] == '0')) settings->fullscreen = (char)i;
+            if(i || (value[0] == '0')) g_settings.fullscreen = (char)i;
         }
         if(!strcmp(key, "FOV")) {
             float i = strtof(value, (char**)NULL);
-            if(i) settings->fov = i;
+            if(i) g_settings.fov = i;
         }
         if(!strcmp(key, "VSYNC")) {
             int i = strtol(value, (char**)NULL, 10);
-            if(i || (value[0] == '0')) settings->vsync = (char)i;
+            if(i || (value[0] == '0')) g_settings.vsync = (char)i;
         }
     }
 
