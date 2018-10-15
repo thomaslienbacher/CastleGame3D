@@ -13,7 +13,10 @@ void engine_init() {
     g_display = display_new("OpenGL", g_settings.width, g_settings.height, g_settings.fullscreen, g_settings.renderScale, g_settings.vsync);
     display_set_icon(g_display, "data/icon.png");
 
-    CLEAR_COLOR[0] = CLEAR_COLOR[1] = CLEAR_COLOR[2] = CLEAR_COLOR[3] = 0.2f;
+    CLEAR_COLOR[0] = 0.7f;
+    CLEAR_COLOR[1] = 0.7f;
+    CLEAR_COLOR[2] = 0.7f;
+    CLEAR_COLOR[3] = 0.0f;
 
     //program
     g_commonProg = program_new("data/common_vs.glsl", "data/common_fs.glsl");

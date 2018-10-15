@@ -35,6 +35,8 @@ int main(int argc, char **argv) {
             g_control.dmx += g_display->width / 2.f - g_control.mx;
             g_control.dmy += g_display->height / 2.f - g_control.my;
             g_control.dmx *= -1;
+
+            game_update();
         }
         else {
             SDL_ShowCursor(SDL_TRUE);
@@ -42,7 +44,6 @@ int main(int argc, char **argv) {
             g_control.button = 0;
         }
 
-        game_update();
         game_render();
 
         display_show(g_display);

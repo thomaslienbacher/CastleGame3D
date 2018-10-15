@@ -3,6 +3,7 @@
 //
 
 #include <program.h>
+#include <render.h>
 #include "world.h"
 #include "game.h"
 #include "engine.h"
@@ -18,15 +19,46 @@ void world_init() {
     texture_wrap(world.skyboxTex, GL_CLAMP_TO_EDGE);
     world.skyboxMesh = mesh_newobj("data/cube.obj");
     world.skybox = model_new(world.skyboxMesh, world.skyboxTex);
-    model_transform(world.skybox, (float[]) {0, 30, 0}, VEC3_ZERO, 100.0f);
+    model_transform(world.skybox, (float[]) {0, 15, 0}, VEC3_ZERO, 90.0f);
     program_unistr_mat(g_skyboxProg, "u_model", world.skybox->mat);
+
+    world.wallTex = texture_new("data/wall.png", GL_LINEAR, 1.0f);
+    texture_wrap(world.wallTex, GL_MIRRORED_REPEAT);
+    world.wallMesh = mesh_newobj("data/wall.obj");
+    world.wall = model_new(world.wallMesh, world.wallTex);
+    model_transform_as(world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE-15, 10, WORLD_SIZE-15});
+}
+
+void world_render() {
+    program_use(g_commonProg);
+    model_transform(world.floor, (float[]){-0.5f * WORLD_SIZE, 0, 0.5f * WORLD_SIZE}, VEC3_ZERO, WORLD_SIZE);
+    program_unistr_mat(g_commonProg, "u_model", world.floor->mat);
+    program_unistr_vec3(g_commonProg, "u_uvscale", (float[]) {15.0f, 15.0f, .0f});//TODO: change to vec2
+    render_model(world.floor);
+
+    glDisable(GL_CULL_FACE);
+
+    program_use(g_skyboxProg);
+    render_model(world.skybox);
+
+    program_use(g_commonProg);
+    program_unistr_mat(g_commonProg, "u_model", world.wall->mat);
+    program_unistr_vec3(g_commonProg, "u_uvscale", (float[]) {3.0f, 1.0f, .0f});
+    render_model(world.wall);
+
+    glEnable(GL_CULL_FACE);
 }
 
 void world_quit() {
     model_free(world.floor);
     mesh_free(world.floorMesh);
     texture_free(world.floorTex);
+
     model_free(world.skybox);
     mesh_free(world.skyboxMesh);
     texture_free(world.skyboxTex);
+
+    model_free(world.wall);
+    mesh_free(world.wallMesh);
+    texture_free(world.wallTex);
 }

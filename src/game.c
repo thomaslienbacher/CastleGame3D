@@ -8,7 +8,7 @@
 
 void game_init() {
     g_control.kb = SDL_GetKeyboardState(NULL);
-    world_init(&world);
+    world_init();
     player_init(&player);
 }
 
@@ -35,20 +35,9 @@ void game_render() {
     //input
     if (g_control.kb[SDL_SCANCODE_ESCAPE]) g_display->running = 0;
 
-    //render floor
-    program_use(g_commonProg);
-    model_transform(world.floor, (float[]){-0.5f * 100.0f, 0, 0.5f * 100.f}, VEC3_ZERO, 100.0f);
-    program_unistr_mat(g_commonProg, "u_model", world.floor->mat);
-    program_unistr_f(g_commonProg, "u_uvscale", 30.0f);
-    render_model(world.floor);
-
-    //lastly render skybox
-    glDisable(GL_CULL_FACE);
-    program_use(g_skyboxProg);
-    render_model(world.skybox);
-    glEnable(GL_CULL_FACE);
+    world_render();
 }
 
 void game_quit(){
-    world_quit(&world);
+    world_quit();
 }

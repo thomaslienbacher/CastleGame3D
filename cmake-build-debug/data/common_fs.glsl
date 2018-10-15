@@ -28,4 +28,5 @@ void main(){
     diffuse = max(diffuse, c_ambient);
     diffuse.a = 1;
     o_color = diffuse * texture(sampler, v_texcoord);
+    //if(o_color.a < 0.9) discard;
 }
