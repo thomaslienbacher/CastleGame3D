@@ -27,7 +27,7 @@ void world_init() {
     texture_wrap(world.wallTex, GL_MIRRORED_REPEAT);
     world.wallMesh = mesh_newobj("data/wall.obj");
     world.wall = model_new(world.wallMesh, world.wallTex);
-    model_transform_as(world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE, 10, WORLD_SIZE});
+    model_transform_as(world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE, 12, WORLD_SIZE});
 }
 
 void world_render() {
