@@ -246,12 +246,6 @@
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/game.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
-		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/interaction.c">
-			<Option target="CastleGame3D"/>
-		</Unit>
-		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/interaction.h">
-			<Option target="CastleGame3D"/>
-		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/main.c">
 			<Option target="CastleGame3D"/>
 		</Unit>
@@ -265,6 +259,12 @@
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/settings.h">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/switch.c">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/switch.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/world.c">

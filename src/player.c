@@ -30,6 +30,9 @@ void player_control() {
 
     if(g_control.kb[SDL_SCANCODE_SPACE] && !g_player.inair) {
         g_player.yvel = JUMP_STRENGTH;
+#ifdef DEBUG_BUILD
+        g_player.yvel = JUMP_STRENGTH * 2;
+#endif
         g_player.inair = 1;
     }
 

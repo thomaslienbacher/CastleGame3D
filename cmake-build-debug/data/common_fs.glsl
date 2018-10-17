@@ -1,7 +1,7 @@
 #version 330
 
 const int c_numLights = 4;
-const float c_ambient = 0.6;
+const float c_ambient = 0.3;
 
 in vec2 v_texcoord;
 in vec3 v_normal;

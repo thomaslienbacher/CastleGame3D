@@ -8,12 +8,14 @@
 #include <camera.h>
 #include <program.h>
 #include <display.h>
+#include <light.h>
 #include "settings.h"
 
 
 extern display_t *g_display;
 extern program_t *g_commonProg, *g_skyboxProg;
 extern camera_t *g_camera;
+extern lightengine_t *g_lightengine;
 
 void engine_init();
 void engine_quit();
