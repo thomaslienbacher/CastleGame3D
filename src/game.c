@@ -30,7 +30,6 @@ void game_render() {
     program_unistr_mat(g_commonProg, "u_projview", projview);
     program_unistr_mat(g_skyboxProg, "u_view", g_camera->viewMat);
     program_unistr_mat(g_skyboxProg, "u_proj", g_camera->projMat);
-    program_unistr_f(g_commonProg, "u_uvscale", 1.0f);
 
     //input
     if (g_control.kb[SDL_SCANCODE_ESCAPE]) g_display->running = 0;

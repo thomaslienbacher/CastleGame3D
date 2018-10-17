@@ -16,7 +16,7 @@ uniform float u_instanced = 0;
 uniform mat4 u_model;
 uniform mat4 u_projview;
 uniform vec3 u_lightpositions[c_numLights];
-uniform vec3 u_uvscale;
+uniform vec2 u_uvscale;
 
 out vec2 v_texcoord;
 out vec3 v_normal;

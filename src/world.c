@@ -33,7 +33,7 @@ void world_render() {
     program_use(g_commonProg);
     model_transform(world.floor, (float[]){-0.5f * WORLD_SIZE, 0, 0.5f * WORLD_SIZE}, VEC3_ZERO, WORLD_SIZE);
     program_unistr_mat(g_commonProg, "u_model", world.floor->mat);
-    program_unistr_vec3(g_commonProg, "u_uvscale", (float[]) {15.0f, 15.0f, .0f});//TODO: change to vec2
+    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {15.0f, 15.0f});//TODO: change to vec2
     render_model(world.floor);
 
     glDisable(GL_CULL_FACE);
@@ -43,7 +43,7 @@ void world_render() {
 
     program_use(g_commonProg);
     program_unistr_mat(g_commonProg, "u_model", world.wall->mat);
-    program_unistr_vec3(g_commonProg, "u_uvscale", (float[]) {4.0f, 1.0f, .0f});
+    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {4.0f, 1.0f});
     render_model(world.wall);
 
     glEnable(GL_CULL_FACE);
