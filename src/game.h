@@ -10,6 +10,8 @@
 #include "player.h"
 #include "settings.h"
 
+#define TITLE "CastleGame3D"
+
 void game_init();
 void game_update();
 void game_render();

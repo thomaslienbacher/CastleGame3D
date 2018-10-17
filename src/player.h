@@ -9,7 +9,7 @@
 #include <SDL2/SDL.h>
 #include "defs.h"
 
-#define PLAYER_SPEED 4.0f
+#define PLAYER_SPEED 8.0f
 #define PLAYER_LOOK_SPEED 1.5f
 #define PLAYER_MAX_PITCH 85
 
@@ -19,9 +19,9 @@ typedef struct _player_s {
     float pitch, yaw;
 } player_t;
 
-extern player_t player;
+extern player_t g_player;
 
-void player_init(player_t *player);
-void player_control(player_t *player, struct control_s *control);
+void player_init();
+void player_control();
 
 #endif //CASTLEGAME3D_PLAYER_H

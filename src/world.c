@@ -14,6 +14,7 @@ void world_init() {
     world.floorTex = texture_new("data/floor.png", GL_LINEAR, 4.0f);
     world.floorMesh = mesh_newobj("data/floor.obj");
     world.floor = model_new(world.floorMesh, world.floorTex);
+    model_transform(world.floor, VEC3_ZERO, VEC3_ZERO, WORLD_SIZE);
 
     world.skyboxTex = texture_new("data/skybox_blurred.png", GL_LINEAR, 1.0f);
     texture_wrap(world.skyboxTex, GL_CLAMP_TO_EDGE);
@@ -26,14 +27,13 @@ void world_init() {
     texture_wrap(world.wallTex, GL_MIRRORED_REPEAT);
     world.wallMesh = mesh_newobj("data/wall.obj");
     world.wall = model_new(world.wallMesh, world.wallTex);
-    model_transform_as(world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE-15, 10, WORLD_SIZE-15});//TODO: remove 15 hard coded
+    model_transform_as(world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE, 10, WORLD_SIZE});
 }
 
 void world_render() {
     program_use(g_commonProg);
-    model_transform(world.floor, (float[]){-0.5f * WORLD_SIZE, 0, 0.5f * WORLD_SIZE}, VEC3_ZERO, WORLD_SIZE);
     program_unistr_mat(g_commonProg, "u_model", world.floor->mat);
-    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {15.0f, 15.0f});//TODO: change to vec2
+    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {15.0f, 15.0f});
     render_model(world.floor);
 
     glDisable(GL_CULL_FACE);
@@ -43,7 +43,7 @@ void world_render() {
 
     program_use(g_commonProg);
     program_unistr_mat(g_commonProg, "u_model", world.wall->mat);
-    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {4.0f, 1.0f});
+    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {6.0f, 1.0f});
     render_model(world.wall);
 
     glEnable(GL_CULL_FACE);

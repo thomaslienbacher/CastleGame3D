@@ -9,21 +9,21 @@
 void game_init() {
     g_control.kb = SDL_GetKeyboardState(NULL);
     world_init();
-    player_init(&player);
+    player_init();
 }
 
 void game_update() {
-    player_control(&player, &g_control);
+    player_control();
 
 #ifdef DEBUG_BUILD
     char title[100];
-    sprintf(title, "FPS: %f %f", 1.0f / g_control.delta, g_control.delta);
+    sprintf(title, TITLE " FPS: %f %f", 1.0f / g_control.delta, g_control.delta);
     SDL_SetWindowTitle(g_display->window, title);
 #endif
 }
 
 void game_render() {
-    camera_view(g_camera, player.pos, player.pitch, player.yaw);
+    camera_view(g_camera, g_player.pos, g_player.pitch, g_player.yaw);
 
     mat4x4 projview;
     mat4x4_mul(projview, g_camera->projMat, g_camera->viewMat);

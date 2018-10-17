@@ -11,14 +11,15 @@
 settings_t g_settings;
 
 void settings_load(const char *filename) {
-    g_settings.width = 400;
-    g_settings.height = 320;
+    g_settings.width = 800;
+    g_settings.height = 640;
     g_settings.renderScale = 1.0f;
-    g_settings.fullscreen = 1;
-    g_settings.fov = 80;
+    g_settings.fullscreen = 0;
+    g_settings.fov = 90;
     g_settings.vsync = 1;
 
-    FILE *file = fadv_open(filename, "r");
+    FILE *file = fopen(filename, "r");
+    if(!file) return;
 
     char key[256];
     char value[256];
