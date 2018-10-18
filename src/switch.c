@@ -14,8 +14,11 @@ void iswitch_init(iswitch_t *iswitch) {
     iswitch->mesh = mesh_newobj("data/switch.obj");
     iswitch->model = model_new(iswitch->mesh, iswitch->texRed);
     iswitch->text = text_new(g_world.font, "Press F to toggle");
-    text_transform(iswitch->text, (vec2){-iswitch->text->width / 2, 0}, 1.0f);//TODO: set mat identity in constructor
+    text_transform(iswitch->text, (vec2){-iswitch->text->width / 2 * 0.8f, -0.7f}, 0.8f);//TODO: set mat identity in constructor
     iswitch->lightId = lightengine_get_id(g_lightengine);
+    iswitch->lastState = 0;
+    iswitch->state = 0;
+    iswitch->pressedLastFrame = 0;
 }
 
 void iswitch_copy(iswitch_t *src, iswitch_t *dst) {
@@ -24,9 +27,31 @@ void iswitch_copy(iswitch_t *src, iswitch_t *dst) {
     src->lightId = lightengine_get_id(g_lightengine);
 }
 
+char iswitch_check(iswitch_t *iswitch) {
+    vec3 tmp;
+    vec3_sub(tmp, g_player.pos, iswitch->model->pos);
+
+    if(g_control.kb[SDL_SCANCODE_F] && vec3_len(tmp) < ISWITCH_DIST) {
+        if(!iswitch->pressedLastFrame) {
+            iswitch->pressedLastFrame = 1;
+            iswitch->state = !iswitch->state;
+        }
+    }
+    else {
+        iswitch->pressedLastFrame = 0;
+    }
+
+    if(iswitch->state != iswitch->lastState) {
+        iswitch->lastState = iswitch->state;
+        return 1;
+    }
+
+    return 0;
+}
+
 void iswitch_render(iswitch_t *iswitch) {
     lightengine_set(g_lightengine, iswitch->lightId, iswitch->state == ISWITCH_GREEN ? VEC3_UNITY : VEC3_UNITX,
-            (float[]){iswitch->model->pos[0], iswitch->model->pos[1]+2.5f, iswitch->model->pos[2]}, 0.7f);
+            (float[]){iswitch->model->pos[0], iswitch->model->pos[1]+2.5f, iswitch->model->pos[2]}, 0.4f);
 
     iswitch->model->texture = iswitch->state == ISWITCH_GREEN ? iswitch->texGreen : iswitch->texRed;
     program_unistr_mat(g_commonProg, "u_model", iswitch->model->mat);

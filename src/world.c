@@ -53,6 +53,13 @@ void world_init() {
     vec3_cpy(g_world.iswitches[3].model->pos, (float[]) {14, 0, -14});
 }
 
+void world_update() {
+    for (int i = 0; i < NUM_ISWITCHES; ++i) {
+        char c = iswitch_check(&g_world.iswitches[i]);
+        if(c) printf("%d toggled\n", i);
+    }
+}
+
 void world_render() {
     lightengine_upload(g_lightengine, g_commonProg);
 
@@ -68,7 +75,6 @@ void world_render() {
     program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {1.0f, 1.0f});
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
         iswitch_render(&g_world.iswitches[i]);
-        if(frame*(1+i) % 100 == 0) g_world.iswitches[i].state = !g_world.iswitches[i].state;
     }
 
     glDisable(GL_CULL_FACE);

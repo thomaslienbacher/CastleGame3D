@@ -14,6 +14,7 @@ void game_init() {
 
 void game_update() {
     player_control();
+    world_update();
 
 #ifdef DEBUG_BUILD
     char title[100];

@@ -41,6 +41,7 @@ typedef struct _world_s {
 extern world_t g_world;
 
 void world_init();
+void world_update();
 void world_render();
 void world_quit();
 

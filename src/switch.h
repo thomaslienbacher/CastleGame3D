@@ -19,11 +19,14 @@ typedef struct _switch_s {
     model_t *model;
     text_t *text;
     char state;
+    char lastState;
+    char pressedLastFrame;
     int lightId;
 } iswitch_t;
 
 void iswitch_init(iswitch_t *iswitch);
 void iswitch_copy(iswitch_t *src, iswitch_t *dst);
+char iswitch_check(iswitch_t *iswitch);
 void iswitch_render(iswitch_t *iswitch);
 
 #endif //CASTLEGAME3D_INTERACTION_H
