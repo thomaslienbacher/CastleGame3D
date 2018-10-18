@@ -68,7 +68,7 @@ void world_render() {
     program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {1.0f, 1.0f});
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
         iswitch_render(&g_world.iswitches[i]);
-        if(frame*(1+i) % 200 == 0) g_world.iswitches[i].state = !g_world.iswitches[i].state;
+        if(frame*(1+i) % 100 == 0) g_world.iswitches[i].state = !g_world.iswitches[i].state;
     }
 
     glDisable(GL_CULL_FACE);

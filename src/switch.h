@@ -10,6 +10,7 @@
 
 #define ISWITCH_RED 0
 #define ISWITCH_GREEN 1
+#define ISWITCH_DIST 2.6f
 
 typedef struct _switch_s {
     texture_t *texRed;
