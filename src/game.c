@@ -5,9 +5,11 @@
 #include <render.h>
 #include "game.h"
 #include "engine.h"
+#include "physics.h"
 
 void game_init() {
     g_control.kb = SDL_GetKeyboardState(NULL);
+    physics_init();
     world_init();
     player_init();
 }
@@ -15,6 +17,7 @@ void game_init() {
 void game_update() {
     player_control();
     world_update();
+    physics_update();
 
 #ifdef DEBUG_BUILD
     char title[100];
@@ -24,7 +27,7 @@ void game_update() {
 }
 
 void game_render() {
-    camera_view(g_camera, g_player.pos, g_player.pitch, g_player.yaw);
+    camera_view(g_camera, (vec3){g_player.body.pos[0], g_player.body.pos[1]+PLAYER_HEIGHT, g_player.body.pos[2]}, g_player.pitch, g_player.yaw);
 
     mat4x4 projview;
     mat4x4_mul(projview, g_camera->projMat, g_camera->viewMat);
@@ -39,5 +42,6 @@ void game_render() {
 }
 
 void game_quit(){
+    physics_quit();
     world_quit();
 }

@@ -20,9 +20,4 @@ struct control_s {
 
 extern struct control_s g_control;
 
-typedef struct _cylinder_s {
-    vec3 pos;
-    float height, radius;
-} cylinder_t;
-
 #endif //CASTLEGAME3D_DEFS_H

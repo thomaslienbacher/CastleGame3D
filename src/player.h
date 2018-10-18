@@ -8,18 +8,17 @@
 #include <tengine_math.h>
 #include <SDL2/SDL.h>
 #include "defs.h"
+#include "physics.h"
 
 #define PLAYER_SPEED 8.0f
 #define PLAYER_LOOK_SPEED 1.5f
 #define PLAYER_MAX_PITCH 85.0f
-#define PLAYER_RADIUS 1.0f
-#define GRAVITY -4.0f
+#define PLAYER_RADIUS 0.5f
 #define PLAYER_HEIGHT 2.0f
-#define JUMP_STRENGTH 1.8f
+#define JUMP_STRENGTH 4.0f
 
 typedef struct _player_s {
-    vec3 pos;
-    float yvel;
+    physicsbody_t body;
     char inair;
     float pitch, yaw;
 } player_t;

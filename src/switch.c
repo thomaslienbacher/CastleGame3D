@@ -19,6 +19,9 @@ void iswitch_init(iswitch_t *iswitch) {
     iswitch->lastState = 0;
     iswitch->state = 0;
     iswitch->pressedLastFrame = 0;
+
+    iswitch->body.height = 1.f;
+    iswitch->body.radius = 0.6f;
 }
 
 void iswitch_copy(iswitch_t *src, iswitch_t *dst) {
@@ -29,9 +32,9 @@ void iswitch_copy(iswitch_t *src, iswitch_t *dst) {
 
 char iswitch_check(iswitch_t *iswitch) {
     vec3 tmp;
-    vec3_sub(tmp, g_player.pos, iswitch->model->pos);
+    vec3_sub(tmp, g_player.body.pos, iswitch->model->pos);
 
-    if(g_control.kb[SDL_SCANCODE_F] && vec3_len(tmp) < ISWITCH_DIST) {
+    if(g_control.kb[SDL_SCANCODE_F] && vec3_lens(tmp) < ISWITCH_DIST*ISWITCH_DIST) {
         if(!iswitch->pressedLastFrame) {
             iswitch->pressedLastFrame = 1;
             iswitch->state = !iswitch->state;
@@ -50,17 +53,19 @@ char iswitch_check(iswitch_t *iswitch) {
 }
 
 void iswitch_render(iswitch_t *iswitch) {
+    vec3_cpy(iswitch->model->pos, iswitch->body.pos);
+
     lightengine_set(g_lightengine, iswitch->lightId, iswitch->state == ISWITCH_GREEN ? VEC3_UNITY : VEC3_UNITX,
-            (float[]){iswitch->model->pos[0], iswitch->model->pos[1]+2.5f, iswitch->model->pos[2]}, 0.4f);
+            (float[]){iswitch->model->pos[0], iswitch->model->pos[1]+2.5f, iswitch->model->pos[2]}, 0.5f);
 
     iswitch->model->texture = iswitch->state == ISWITCH_GREEN ? iswitch->texGreen : iswitch->texRed;
     program_unistr_mat(g_commonProg, "u_model", iswitch->model->mat);
     render_model(iswitch->model);
 
     vec3 tmp;
-    vec3_sub(tmp, g_player.pos, iswitch->model->pos);
+    vec3_sub(tmp, g_player.body.pos, iswitch->model->pos);
 
-    if(vec3_len(tmp) < ISWITCH_DIST) {//TODO: create len function without sqrt
+    if(vec3_lens(tmp) < ISWITCH_DIST*ISWITCH_DIST) {
         program_use(g_fontProg);
         program_unistr_mat(g_fontProg, "u_transform", iswitch->text->mat);
         render_text(iswitch->text);

@@ -9,6 +9,7 @@
 #include <vector.h>
 #include <text.h>
 #include "switch.h"
+#include "physics.h"
 
 #define WORLD_SIZE 30.0f
 #define NUM_ISWITCHES 4
@@ -17,6 +18,7 @@ typedef struct _world_s {
     texture_t *floorTex;
     mesh_t *floorMesh;
     model_t *floor;
+    physicsbody_t floorBody;
 
     texture_t *skyboxTex;
     mesh_t *skyboxMesh;
@@ -26,7 +28,6 @@ typedef struct _world_s {
     mesh_t *wallMesh;
     model_t *wall;
 
-    vector_t *cylinders;
     vector_t *platforms;
     iswitch_t iswitches[NUM_ISWITCHES];
 

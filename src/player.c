@@ -10,7 +10,10 @@
 player_t g_player;
 
 void player_init() {
-    vec3_set(g_player.pos, 0, PLAYER_HEIGHT, 0);
+    vec3_set(g_player.body.pos, 0, 2, 0);
+    g_player.body.height = PLAYER_HEIGHT;
+    g_player.body.radius = PLAYER_RADIUS;
+    g_physicsengine.player = &g_player.body;
 }
 
 void player_control() {
@@ -20,33 +23,26 @@ void player_control() {
     if(g_player.pitch > PLAYER_MAX_PITCH) g_player.pitch = PLAYER_MAX_PITCH;
     if(g_player.pitch < -PLAYER_MAX_PITCH) g_player.pitch = -PLAYER_MAX_PITCH;
 
-    vec3 move = {0};
+    vec2 move = {0};
 
     move[0] += g_control.kb[SDL_SCANCODE_W];
     move[0] -= g_control.kb[SDL_SCANCODE_S];
-    move[2] -= g_control.kb[SDL_SCANCODE_A];
-    move[2] += g_control.kb[SDL_SCANCODE_D];
+    move[1] -= g_control.kb[SDL_SCANCODE_A];
+    move[1] += g_control.kb[SDL_SCANCODE_D];
 
 
     if(g_control.kb[SDL_SCANCODE_SPACE] && !g_player.inair) {
-        g_player.yvel = JUMP_STRENGTH;
+        g_player.body.vel[1] = JUMP_STRENGTH;
 #ifdef DEBUG_BUILD
-        g_player.yvel = JUMP_STRENGTH * 2;
+        g_player.body.vel[1] = JUMP_STRENGTH * 2;
 #endif
         g_player.inair = 1;
     }
 
-    g_player.yvel += GRAVITY * g_control.delta;
+    vec2_norm(move, move);
+    vec2_rot(move, move, g_player.yaw * DEG_2_RAD - FM_PI_2);
+    vec2_scale(move, move, PLAYER_SPEED);
 
-    vec3_norm(move, move);
-    float2_rot(move, move+2, g_player.yaw * DEG_2_RAD - FM_PI_2);
-    move[1] += g_player.yvel;
-    vec3_scale(move, move, PLAYER_SPEED * g_control.delta);
-
-    vec3_add(g_player.pos, g_player.pos, move);
-    if(g_player.pos[1] < PLAYER_HEIGHT) g_player.inair = 0;
-
-    g_player.pos[0] = clampf(g_player.pos[0], -WORLD_SIZE + PLAYER_RADIUS, WORLD_SIZE - PLAYER_RADIUS);
-    g_player.pos[1] = clampf(g_player.pos[1], PLAYER_HEIGHT, 2000.0f);
-    g_player.pos[2] = clampf(g_player.pos[2], -WORLD_SIZE + PLAYER_RADIUS, WORLD_SIZE - PLAYER_RADIUS);
+    g_player.body.vel[0] = move[0];
+    g_player.body.vel[2] = move[1];
 }

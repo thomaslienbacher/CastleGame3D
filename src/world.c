@@ -17,8 +17,12 @@ void world_init() {
     g_world.floorMesh = mesh_newobj("data/floor.obj");
     g_world.floor = model_new(g_world.floorMesh, g_world.floorTex);
     model_transform(g_world.floor, VEC3_ZERO, VEC3_ZERO, WORLD_SIZE);
+    g_world.floorBody.pos[1] = -1;
+    g_world.floorBody.radius = WORLD_SIZE * 2;
+    g_world.floorBody.height = 1;
+    physics_add_body(&g_world.floorBody);
 
-    g_world.skyboxTex = texture_new("data/skybox_blurred.png", GL_LINEAR, 1.0f);
+    g_world.skyboxTex = texture_new("data/skybox_blurred.png", GL_NEAREST, 1.0f);
     texture_wrap(g_world.skyboxTex, GL_CLAMP_TO_EDGE);
     g_world.skyboxMesh = mesh_newobj("data/cube.obj");
     g_world.skybox = model_new(g_world.skyboxMesh, g_world.skyboxTex);
@@ -40,28 +44,46 @@ void world_init() {
     iswitch_copy(&g_world.iswitches[0], &g_world.iswitches[2]);
     iswitch_copy(&g_world.iswitches[0], &g_world.iswitches[3]);
 
-    model_transform(g_world.iswitches[0].model, (float[]) {-14, 0, 14}, VEC3_ZERO, 1.0f);
-    vec3_cpy(g_world.iswitches[0].model->pos, (float[]) {-14, 0, 14});
+    int i = 0;
 
-    model_transform(g_world.iswitches[1].model, (float[]) {-14, 0, -14}, VEC3_ZERO, 1.0f);
-    vec3_cpy(g_world.iswitches[1].model->pos, (float[]) {-14, 0, -14});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 0, -13});
+    model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
+    physics_add_body(&g_world.iswitches[i].body); i++;
 
-    model_transform(g_world.iswitches[2].model, (float[]) {14, 0, 14}, VEC3_ZERO, 1.0f);
-    vec3_cpy(g_world.iswitches[2].model->pos, (float[]) {14, 0, 14});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 0, 13});
+    model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
+    physics_add_body(&g_world.iswitches[i].body); i++;
 
-    model_transform(g_world.iswitches[3].model, (float[]) {14, 0, -14}, VEC3_ZERO, 1.0f);
-    vec3_cpy(g_world.iswitches[3].model->pos, (float[]) {14, 0, -14});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 0, 13});
+    model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
+    physics_add_body(&g_world.iswitches[i].body); i++;
+
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 0, -13});
+    model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
+    physics_add_body(&g_world.iswitches[i].body); i++;
 }
 
 void world_update() {
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
         char c = iswitch_check(&g_world.iswitches[i]);
-        if(c) printf("%d toggled\n", i);
+        if (c) printf("%d toggled\n", i);
     }
 }
 
 void world_render() {
     lightengine_upload(g_lightengine, g_commonProg);
+
+    glDisable(GL_CULL_FACE);
+
+    program_use(g_skyboxProg);
+    render_model(g_world.skybox);
+
+    program_use(g_commonProg);
+    program_unistr_mat(g_commonProg, "u_model", g_world.wall->mat);
+    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {6.0f, 1.0f});
+    render_model(g_world.wall);
+
+    glEnable(GL_CULL_FACE);
 
     program_use(g_commonProg);
     program_unistr_mat(g_commonProg, "u_model", g_world.floor->mat);
@@ -76,18 +98,6 @@ void world_render() {
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
         iswitch_render(&g_world.iswitches[i]);
     }
-
-    glDisable(GL_CULL_FACE);
-
-    program_use(g_skyboxProg);
-    render_model(g_world.skybox);
-
-    program_use(g_commonProg);
-    program_unistr_mat(g_commonProg, "u_model", g_world.wall->mat);
-    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {6.0f, 1.0f});
-    render_model(g_world.wall);
-
-    glEnable(GL_CULL_FACE);
 }
 
 void world_quit() {

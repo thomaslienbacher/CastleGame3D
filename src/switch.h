@@ -7,12 +7,14 @@
 
 #include <model.h>
 #include <text.h>
+#include "physics.h"
 
 #define ISWITCH_RED 0
 #define ISWITCH_GREEN 1
-#define ISWITCH_DIST 2.6f
+#define ISWITCH_DIST 2.7f
 
 typedef struct _switch_s {
+    physicsbody_t body;
     texture_t *texRed;
     texture_t *texGreen;
     mesh_t *mesh;
