@@ -8,6 +8,8 @@
 #include <model.h>
 #include "physics.h"
 
+#define PLATFORM_HEIGHT 0.5f
+
 typedef struct _platform_s {
     physicsbody_t body;
     texture_t *tex;

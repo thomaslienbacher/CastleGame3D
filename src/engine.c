@@ -26,7 +26,7 @@ void engine_init() {
     g_fontProg = program_new("data/font_vs.glsl", "data/font_fs.glsl");
 
     g_camera = camera_new(g_settings.fov, (float) g_display->width / g_display->height, 0.1f, 200);
-    g_lightengine = lightengine_new(g_commonProg, NUM_ISWITCHES);
+    g_lightengine = lightengine_new(g_commonProg, NUM_ISWITCHES+1);
 }
 
 void engine_quit() {

@@ -4,8 +4,10 @@
 
 #include <stdio.h>
 #include <mem.h>
+#include <light.h>
 #include "player.h"
 #include "world.h"
+#include "engine.h"
 
 player_t g_player;
 
@@ -14,10 +16,14 @@ void player_init() {
     g_player.inair = 1;
     g_player.body.height = PLAYER_HEIGHT;
     g_player.body.radius = PLAYER_RADIUS;
+    g_player.lightId = lightengine_get_id(g_lightengine);
     g_physicsengine.player = &g_player.body;
 }
 
 void player_control() {
+    lightengine_set(g_lightengine, g_player.lightId, (vec3){1.0f, 1.0f, 1.0f},
+                    (vec3){g_player.body.pos[0], g_player.body.pos[1]+PLAYER_HEIGHT / 2, g_player.body.pos[2]}, 3.5f);
+
     g_player.yaw += g_control.dmx * g_control.delta * PLAYER_LOOK_SPEED;
     g_player.pitch -= g_control.dmy * g_control.delta * PLAYER_LOOK_SPEED;
 
@@ -34,9 +40,6 @@ void player_control() {
 
     if(g_control.kb[SDL_SCANCODE_SPACE] && !g_player.inair) {
         g_player.body.vel[1] = JUMP_STRENGTH;
-#ifdef DEBUG_BUILD
-        g_player.body.vel[1] = JUMP_STRENGTH * 2;
-#endif
         g_player.inair = 1;
     }
 

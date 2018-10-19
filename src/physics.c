@@ -94,7 +94,8 @@ void physics_update() {
                 }
             }
         } else {
-            vec3_add(g_physicsengine.player->vel, g_physicsengine.player->vel, (vec3) {0, GRAVITY * delta, 0});
+            float grav = GRAVITY * delta * (g_physicsengine.player->vel[1] < 0 ? 1.4f : 1.0f);
+            vec3_add(g_physicsengine.player->vel, g_physicsengine.player->vel, (vec3) {0, grav, 0});
             vec3 move;
             vec3_scale(move, g_physicsengine.player->vel, delta);
             vec3_add(g_physicsengine.player->pos, g_physicsengine.player->pos, move);

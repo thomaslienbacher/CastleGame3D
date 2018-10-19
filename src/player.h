@@ -15,12 +15,13 @@
 #define PLAYER_MAX_PITCH 85.0f
 #define PLAYER_RADIUS 0.5f
 #define PLAYER_HEIGHT 2.3f
-#define JUMP_STRENGTH 7.0f
+#define JUMP_STRENGTH 16.0f
 
 typedef struct _player_s {
     physicsbody_t body;
     char inair;
     float pitch, yaw;
+    int lightId;
 } player_t;
 
 extern player_t g_player;

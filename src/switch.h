@@ -12,6 +12,7 @@
 #define ISWITCH_RED 0
 #define ISWITCH_GREEN 1
 #define ISWITCH_DIST 2.7f
+#define ISWITCH_DEACT_TIME 3.0f
 
 typedef struct _switch_s {
     physicsbody_t body;
@@ -21,8 +22,7 @@ typedef struct _switch_s {
     model_t *model;
     text_t *text;
     char state;
-    char lastState;
-    char pressedLastFrame;
+    float time;
     int lightId;
 } iswitch_t;
 

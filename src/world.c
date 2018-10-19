@@ -47,22 +47,22 @@ void world_init() {
 
     int i = 0;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 0, -13});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {0, 0, -3});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 10, 13});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-8, 17+PLATFORM_HEIGHT, -8});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 11, 13});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {10.5, 22, 10.5});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 12, -13});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-2, 37+PLATFORM_HEIGHT, 7});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
@@ -81,7 +81,17 @@ void world_init() {
     }
     {
         platform_t *plat0 = calloc(1, sizeof(platform_t));
+        platform_copy(plat, plat0, (vec3) {12, 27, 12});
+        vector_push(g_world.platforms, plat0);
+    }
+    {
+        platform_t *plat0 = calloc(1, sizeof(platform_t));
         platform_copy(plat, plat0, (vec3) {-8, 17, -8});
+        vector_push(g_world.platforms, plat0);
+    }
+    {
+        platform_t *plat0 = calloc(1, sizeof(platform_t));
+        platform_copy(plat, plat0, (vec3) {0, 60, 0});
         vector_push(g_world.platforms, plat0);
     }
 }
@@ -89,6 +99,15 @@ void world_init() {
 void world_update() {
     if(iswitch_check(&g_world.iswitches[0])) {
         platform_animate(vector_get(g_world.platforms, 0), (vec3) {5, 6, 2});
+    }
+    if(iswitch_check(&g_world.iswitches[1])) {
+        platform_animate(vector_get(g_world.platforms, 0), (vec3) {-3, 27, -3});
+    }
+    if(iswitch_check(&g_world.iswitches[2])) {
+        platform_animate(vector_get(g_world.platforms, 0), (vec3) {0, 37, 7});
+    }
+    if(iswitch_check(&g_world.iswitches[3])) {
+        platform_animate(vector_get(g_world.platforms, 0), (vec3) {0, 50, 7});
     }
 
     for (int i = 0; i < g_world.platforms->size; ++i) {

@@ -16,9 +16,7 @@ void iswitch_init(iswitch_t *iswitch) {
     iswitch->text = text_new(g_world.font, "Press F to activate");
     text_transform(iswitch->text, (vec2){-iswitch->text->width / 2 * 0.8f, -0.7f}, 0.8f);//TODO: set mat identity in constructor
     iswitch->lightId = lightengine_get_id(g_lightengine);
-    iswitch->lastState = 0;
     iswitch->state = 0;
-    iswitch->pressedLastFrame = 0;
 
     iswitch->body.height = 1.f;
     iswitch->body.radius = 0.6f;
@@ -31,37 +29,23 @@ void iswitch_copy(iswitch_t *src, iswitch_t *dst) {
 }
 
 char iswitch_check(iswitch_t *iswitch) {
-    vec3 tmp;
-    vec3_sub(tmp, g_player.body.pos, iswitch->model->pos);
+    iswitch->time -= g_control.delta;
 
-    //only on mode
-    if(g_control.kb[SDL_SCANCODE_F] && vec3_lens(tmp) < ISWITCH_DIST*ISWITCH_DIST) {
-        if(!iswitch->state) {
-            iswitch->state = 1;
-            return 1;
+    if(iswitch->time <= 0) {
+        vec3 tmp;
+        vec3_sub(tmp, g_player.body.pos, iswitch->model->pos);
+
+        if(g_control.kb[SDL_SCANCODE_F] && vec3_lens(tmp) < ISWITCH_DIST*ISWITCH_DIST) {
+            if(!iswitch->state) {
+                iswitch->state = 1;
+                iswitch->time = ISWITCH_DEACT_TIME;
+
+                return 1;
+            }
         }
+
+        iswitch->state = 0;
     }
-
-    return 0;
-
-    //toggle mode
-    /*vec3 tmp;
-    vec3_sub(tmp, g_player.body.pos, iswitch->model->pos);
-
-    if(g_control.kb[SDL_SCANCODE_F] && vec3_lens(tmp) < ISWITCH_DIST*ISWITCH_DIST) {
-        if(!iswitch->pressedLastFrame) {
-            iswitch->pressedLastFrame = 1;
-            iswitch->state = !iswitch->state;
-        }
-    }
-    else {
-        iswitch->pressedLastFrame = 0;
-    }
-
-    if(iswitch->state != iswitch->lastState) {
-        iswitch->lastState = iswitch->state;
-        return 1;
-    }*/
 
     return 0;
 }
@@ -70,7 +54,7 @@ void iswitch_render(iswitch_t *iswitch) {
     vec3_cpy(iswitch->model->pos, iswitch->body.pos);
 
     lightengine_set(g_lightengine, iswitch->lightId, iswitch->state == ISWITCH_GREEN ? VEC3_UNITY : VEC3_UNITX,
-            (float[]){iswitch->model->pos[0], iswitch->model->pos[1]+2.5f, iswitch->model->pos[2]}, 1.1f);
+            (float[]){iswitch->model->pos[0], iswitch->model->pos[1]+2.5f, iswitch->model->pos[2]}, 1.3f);
 
     iswitch->model->texture = iswitch->state == ISWITCH_GREEN ? iswitch->texGreen : iswitch->texRed;
     program_unistr_mat(g_commonProg, "u_model", iswitch->model->mat);

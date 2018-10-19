@@ -10,7 +10,7 @@ layout(location = 4) in vec4 i_modelCol2;
 layout(location = 5) in vec4 i_modelCol3;
 layout(location = 6) in vec4 i_modelCol4;
 
-const int c_numLights = 4;
+const int c_numLights = 5;
 
 uniform float u_instanced = 0;
 uniform mat4 u_model;

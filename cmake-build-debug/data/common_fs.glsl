@@ -1,6 +1,6 @@
 #version 330
 
-const int c_numLights = 4;
+const int c_numLights = 5;
 const float c_ambient = 0.5;
 
 in vec2 v_texcoord;
@@ -19,7 +19,9 @@ void main(){
     for(int i = 0; i < c_numLights; i++){
         if(u_lightstrengths[i] == 0) continue;
         float dis = length(v_tolight[i]);
-        float attenuation = 1 / (1 + u_lightstrengths[i] * 0.005f * dis * dis);
+        //float attenuation = max(1 / (1 + u_lightstrengths[i] * 0.009f * dis * dis - 0.003f * dis * dis * dis), 0);
+        float attenuation = inversesqrt(dis) * u_lightstrengths[i];
+
         float b = max(dot(v_normal, normalize(v_tolight[i])), 0);
         diffuse += vec4(normalize(u_lightcolors[i]) * b * attenuation, 1);
     }

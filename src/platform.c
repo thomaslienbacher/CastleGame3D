@@ -14,7 +14,7 @@ void platform_init(platform_t *platform, vec3 pos) {
     platform->model = model_new(platform->mesh, platform->tex);
 
     vec3_cpy(platform->body.pos, pos);
-    platform->body.height = 0.5f;
+    platform->body.height = PLATFORM_HEIGHT;
     platform->body.radius = 3.0f;
     physics_add_body(&platform->body);
 
@@ -36,7 +36,7 @@ void platform_animate(platform_t *platform, vec3 newPos) {
 void platform_update(platform_t *platform) {
     platform->time += g_control.delta;
 
-    if(platform->time < 10.0f) {
+    if(platform->time < 12.0f) {
         platform->body.pos[0] = mlinearf(platform->body.pos[0], platform->newPos[0], 0.8f * g_control.delta);
         platform->body.pos[1] = mlinearf(platform->body.pos[1], platform->newPos[1], 0.8f * g_control.delta);
         platform->body.pos[2] = mlinearf(platform->body.pos[2], platform->newPos[2], 0.8f * g_control.delta);
