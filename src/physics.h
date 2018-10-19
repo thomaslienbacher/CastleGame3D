@@ -8,7 +8,7 @@
 #include <vector.h>
 #include <tengine_math.h>
 
-#define GRAVITY -10.0f
+#define GRAVITY -12.0f
 #define SPACING 0.003f
 
 typedef struct _physicsbody_s {

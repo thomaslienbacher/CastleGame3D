@@ -12,8 +12,8 @@
 physicsengine_t g_physicsengine;
 
 void physics_init() {
-    g_physicsengine.bodys = vector_new(24);
-    g_physicsengine.steps = 4;
+    g_physicsengine.bodys = vector_new(16);
+    g_physicsengine.steps = 3;
 }
 
 void physics_add_body(physicsbody_t *physicsbody) {
@@ -63,26 +63,26 @@ void physics_update() {
                 physicsbody_t *b = (physicsbody_t *) vector_get(colliders, i);
                 if (!b) continue;
 
-                vec3_zero(g_physicsengine.player->vel);
-
                 vec2 tmp;
                 vec2 bpos2d = {b->pos[0], b->pos[2]};
                 vec2 ppos2d ={g_physicsengine.player->pos[0], g_physicsengine.player->pos[2]};
                 vec2_sub(tmp, ppos2d, bpos2d);
 
                 //ontop
-                if (vec2_len(tmp) < b->radius) {
+                float dist = vec2_len(tmp);
+                if (dist < b->radius) {
                     g_physicsengine.player->pos[1] = b->pos[1] + b->height + SPACING;
                     g_player.inair = 0;
+                    g_physicsengine.player->vel[1] = 0;
 
                 } else { //side
                     vec3 away;
                     vec3_sub(away, g_physicsengine.player->pos, b->pos);
                     away[1] = 0;
                     vec3_norm(away, away);
-                    vec3_scale(away, away, SPACING);
+                    vec3_scale(away, away, (b->radius + g_physicsengine.player->radius) - dist + SPACING);
                     vec3_add(g_physicsengine.player->pos, g_physicsengine.player->pos, away);
-                    vec3_print(away);
+                    g_physicsengine.player->vel[0] = g_physicsengine.player->vel[2] = 0;
                 }
             }
         } else {
