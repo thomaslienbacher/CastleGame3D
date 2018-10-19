@@ -52,17 +52,17 @@ void world_init() {
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 0, 13});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 10, 13});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 0, 13});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 11, 13});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 0, -13});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 12, -13});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
@@ -71,7 +71,7 @@ void world_init() {
 
 
     platform_t *plat = calloc(1, sizeof(platform_t));
-    platform_init(plat, (vec3) {5, 7, 2});
+    platform_init(plat, (vec3) {5, 20, 2});
     vector_push(g_world.platforms, plat);
 
     {
@@ -81,20 +81,20 @@ void world_init() {
     }
     {
         platform_t *plat0 = calloc(1, sizeof(platform_t));
-        platform_copy(plat, plat0, (vec3) {8, 20, 8});
+        platform_copy(plat, plat0, (vec3) {-8, 17, -8});
         vector_push(g_world.platforms, plat0);
     }
 }
 
 void world_update() {
-    for (int i = 0; i < NUM_ISWITCHES; ++i) {
-        char c = iswitch_check(&g_world.iswitches[i]);
-        if (c) printf("%d toggled\n", i);
+    if(iswitch_check(&g_world.iswitches[0])) {
+        platform_animate(vector_get(g_world.platforms, 0), (vec3) {5, 6, 2});
     }
 
     for (int i = 0; i < g_world.platforms->size; ++i) {
-        if (g_world.platforms->array[i]) {
-            platform_update((platform_t *) &g_world.platforms->array[i]);
+        platform_t *p = (platform_t *)vector_get(g_world.platforms, i);
+        if (p) {
+            platform_update(p);
         }
     }
 }
@@ -129,8 +129,9 @@ void world_render() {
     }
 
     for (int i = 0; i < g_world.platforms->size; ++i) {
-        if (g_world.platforms->array[i]) {
-            platform_render((platform_t *) g_world.platforms->array[i]);
+        platform_t *p = (platform_t *)vector_get(g_world.platforms, i);
+        if (p) {
+            platform_render(p);
         }
     }
 }

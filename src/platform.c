@@ -6,6 +6,7 @@
 #include <render.h>
 #include "platform.h"
 #include "engine.h"
+#include "defs.h"
 
 void platform_init(platform_t *platform, vec3 pos) {
     platform->tex = texture_new("data/platform.png", GL_LINEAR, 1.0f);
@@ -16,6 +17,8 @@ void platform_init(platform_t *platform, vec3 pos) {
     platform->body.height = 0.5f;
     platform->body.radius = 3.0f;
     physics_add_body(&platform->body);
+
+    platform->time = 100.0f;
 }
 
 void platform_copy(platform_t *src, platform_t *dst, vec3 pos) {
@@ -25,16 +28,19 @@ void platform_copy(platform_t *src, platform_t *dst, vec3 pos) {
     physics_add_body(&dst->body);
 }
 
-void platform_animate(platform_t *platform, vec3 newPos, float timeLength) {
+void platform_animate(platform_t *platform, vec3 newPos) {
     vec3_cpy(platform->newPos, newPos);
     platform->time = 0;
-    platform->animTimeLen = timeLength;
 }
 
-//TODO: implement
 void platform_update(platform_t *platform) {
-    //platform->time += delta;
+    platform->time += g_control.delta;
 
+    if(platform->time < 10.0f) {
+        platform->body.pos[0] = mlinearf(platform->body.pos[0], platform->newPos[0], 0.8f * g_control.delta);
+        platform->body.pos[1] = mlinearf(platform->body.pos[1], platform->newPos[1], 0.8f * g_control.delta);
+        platform->body.pos[2] = mlinearf(platform->body.pos[2], platform->newPos[2], 0.8f * g_control.delta);
+    }
 }
 
 void platform_render(platform_t *platform) {

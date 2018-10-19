@@ -15,12 +15,11 @@ typedef struct _platform_s {
     model_t *model;
     float time;
     vec3 newPos;
-    float animTimeLen;
 } platform_t;
 
 void platform_init(platform_t *platform, vec3 pos);
 void platform_copy(platform_t *src, platform_t *dst, vec3 pos);
-void platform_animate(platform_t *platform, vec3 newPos, float timeLength);
+void platform_animate(platform_t *platform, vec3 newPos);
 void platform_update(platform_t *platform);
 void platform_render(platform_t *platform);
 
