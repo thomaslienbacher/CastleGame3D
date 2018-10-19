@@ -71,8 +71,16 @@ void physics_update() {
                 //ontop
                 float dist = vec2_len(tmp);
                 if (dist < b->radius) {
-                    g_physicsengine.player->pos[1] = b->pos[1] + b->height + SPACING;
-                    g_player.inair = 0;
+
+                    if(g_physicsengine.player->pos[1] > b->pos[1]){
+                        g_physicsengine.player->pos[1] = b->pos[1] + b->height + SPACING;
+                        g_player.inair = 0;
+                    }
+                    else {
+                        g_physicsengine.player->pos[1] = b->pos[1] - g_physicsengine.player->height - SPACING;
+                        g_player.inair = 1;
+                    }
+
                     g_physicsengine.player->vel[1] = 0;
 
                 } else { //side

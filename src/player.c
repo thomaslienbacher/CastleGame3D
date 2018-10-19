@@ -10,7 +10,7 @@
 player_t g_player;
 
 void player_init() {
-    vec3_set(g_player.body.pos, 0, 2, 0);
+    vec3_set(g_player.body.pos, 0, 1, 0);
     g_player.inair = 1;
     g_player.body.height = PLAYER_HEIGHT;
     g_player.body.radius = PLAYER_RADIUS;

@@ -26,8 +26,8 @@ void iswitch_init(iswitch_t *iswitch) {
 
 void iswitch_copy(iswitch_t *src, iswitch_t *dst) {
     memcpy(dst, src, sizeof(iswitch_t));
-    src->model = model_new(src->mesh, src->texRed);
-    src->lightId = lightengine_get_id(g_lightengine);
+    dst->model = model_new(src->mesh, src->texRed);
+    dst->lightId = lightengine_get_id(g_lightengine);
 }
 
 char iswitch_check(iswitch_t *iswitch) {

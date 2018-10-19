@@ -8,6 +8,7 @@
 #include "game.h"
 #include "engine.h"
 #include "switch.h"
+#include "platform.h"
 
 world_t g_world;
 
@@ -48,25 +49,53 @@ void world_init() {
 
     vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 0, -13});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
-    physics_add_body(&g_world.iswitches[i].body); i++;
+    physics_add_body(&g_world.iswitches[i].body);
+    i++;
 
     vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-13, 0, 13});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
-    physics_add_body(&g_world.iswitches[i].body); i++;
+    physics_add_body(&g_world.iswitches[i].body);
+    i++;
 
     vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 0, 13});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
-    physics_add_body(&g_world.iswitches[i].body); i++;
+    physics_add_body(&g_world.iswitches[i].body);
+    i++;
 
     vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {13, 0, -13});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
-    physics_add_body(&g_world.iswitches[i].body); i++;
+    physics_add_body(&g_world.iswitches[i].body);
+    i++;
+
+    g_world.platforms = vector_new(10);
+
+
+    platform_t *plat = calloc(1, sizeof(platform_t));
+    platform_init(plat, (vec3) {5, 7, 2});
+    vector_push(g_world.platforms, plat);
+
+    {
+        platform_t *plat0 = calloc(1, sizeof(platform_t));
+        platform_copy(plat, plat0, (vec3) {12, 13, -7});
+        vector_push(g_world.platforms, plat0);
+    }
+    {
+        platform_t *plat0 = calloc(1, sizeof(platform_t));
+        platform_copy(plat, plat0, (vec3) {8, 20, 8});
+        vector_push(g_world.platforms, plat0);
+    }
 }
 
 void world_update() {
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
         char c = iswitch_check(&g_world.iswitches[i]);
         if (c) printf("%d toggled\n", i);
+    }
+
+    for (int i = 0; i < g_world.platforms->size; ++i) {
+        if (g_world.platforms->array[i]) {
+            platform_update((platform_t *) &g_world.platforms->array[i]);
+        }
     }
 }
 
@@ -87,7 +116,7 @@ void world_render() {
 
     program_use(g_commonProg);
     program_unistr_mat(g_commonProg, "u_model", g_world.floor->mat);
-    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {15.0f, 15.0f});
+    program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {12.0f, 12.0f});
     render_model(g_world.floor);
 
     static int frame = 0;
@@ -97,6 +126,12 @@ void world_render() {
     program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {1.0f, 1.0f});
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
         iswitch_render(&g_world.iswitches[i]);
+    }
+
+    for (int i = 0; i < g_world.platforms->size; ++i) {
+        if (g_world.platforms->array[i]) {
+            platform_render((platform_t *) g_world.platforms->array[i]);
+        }
     }
 }
 

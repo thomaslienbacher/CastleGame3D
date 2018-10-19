@@ -255,6 +255,12 @@
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/physics.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/platform.c">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/platform.h">
+			<Option target="CastleGame3D"/>
+		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/player.c">
 			<Option target="CastleGame3D"/>
 		</Unit>
