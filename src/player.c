@@ -22,7 +22,7 @@ void player_init() {
 
 void player_control() {
     lightengine_set(g_lightengine, g_player.lightId, (vec3){1.0f, 1.0f, 1.0f},
-                    (vec3){g_player.body.pos[0], g_player.body.pos[1]+PLAYER_HEIGHT / 2, g_player.body.pos[2]}, 3.5f);
+                    (vec3){g_player.body.pos[0], g_player.body.pos[1]+PLAYER_HEIGHT, g_player.body.pos[2]}, 3.5f);
 
     g_player.yaw += g_control.dmx * g_control.delta * PLAYER_LOOK_SPEED;
     g_player.pitch -= g_control.dmy * g_control.delta * PLAYER_LOOK_SPEED;

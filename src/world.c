@@ -32,7 +32,7 @@ void world_init() {
 
     g_world.wallTex = texture_new("data/wall.png", GL_LINEAR, 1.0f);
     texture_wrap(g_world.wallTex, GL_MIRRORED_REPEAT);
-    g_world.wallMesh = mesh_newobj("data/wall.obj");
+    g_world.wallMesh = mesh_newobj("data/wall_inv_normals.obj");
     g_world.wall = model_new(g_world.wallMesh, g_world.wallTex);
     model_transform_as(g_world.wall, (float[]) {0, -5, 0}, VEC3_ZERO, (float[]) {WORLD_SIZE, 12, WORLD_SIZE});
 

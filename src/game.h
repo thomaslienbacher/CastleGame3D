@@ -10,7 +10,7 @@
 #include "player.h"
 #include "settings.h"
 
-#define TITLE "CastleGame3D"
+#define TITLE "Castle Jumping 3D"
 
 void game_init();
 void game_update();
