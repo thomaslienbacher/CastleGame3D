@@ -25,7 +25,7 @@ void engine_init() {
     g_skyboxProg = program_new("data/skybox_vs.glsl", "data/skybox_fs.glsl");
     g_fontProg = program_new("data/font_vs.glsl", "data/font_fs.glsl");
 
-    g_camera = camera_new(g_settings.fov, (float) g_display->width / g_display->height, 0.1f, 200);
+    g_camera = camera_new(g_settings.fov, (float) g_display->width / g_display->height, 0.2f, 300.0f);
     g_lightengine = lightengine_new(g_commonProg, NUM_ISWITCHES+1);
 }
 

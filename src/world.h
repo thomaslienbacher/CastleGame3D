@@ -10,6 +10,7 @@
 #include <text.h>
 #include "switch.h"
 #include "physics.h"
+#include "jewel.h"
 
 #define WORLD_SIZE 30.0f
 #define NUM_ISWITCHES 4
@@ -31,10 +32,7 @@ typedef struct _world_s {
     vector_t *platforms;
     iswitch_t iswitches[NUM_ISWITCHES];
 
-    texture_t *jewelTex;
-    mesh_t *jewelMesh;
-    model_t *jewel;
-    int jewelCollected;
+    jewel_t jewel;
 
     font_t *font;
 } world_t;

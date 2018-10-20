@@ -36,10 +36,10 @@ void platform_animate(platform_t *platform, vec3 newPos) {
 void platform_update(platform_t *platform) {
     platform->time += g_control.delta;
 
-    if(platform->time < 12.0f) {
-        platform->body.pos[0] = mlinearf(platform->body.pos[0], platform->newPos[0], 0.8f * g_control.delta);
-        platform->body.pos[1] = mlinearf(platform->body.pos[1], platform->newPos[1], 0.8f * g_control.delta);
-        platform->body.pos[2] = mlinearf(platform->body.pos[2], platform->newPos[2], 0.8f * g_control.delta);
+    if(platform->time < 7.0f) {
+        platform->body.pos[0] = mlinearf(platform->body.pos[0], platform->newPos[0], 1.1f * g_control.delta);
+        platform->body.pos[1] = mlinearf(platform->body.pos[1], platform->newPos[1], 1.1f * g_control.delta);
+        platform->body.pos[2] = mlinearf(platform->body.pos[2], platform->newPos[2], 1.1f * g_control.delta);
     }
 }
 

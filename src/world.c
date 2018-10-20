@@ -27,7 +27,7 @@ void world_init() {
     texture_wrap(g_world.skyboxTex, GL_CLAMP_TO_EDGE);
     g_world.skyboxMesh = mesh_newobj("data/cube.obj");
     g_world.skybox = model_new(g_world.skyboxMesh, g_world.skyboxTex);
-    model_transform(g_world.skybox, (float[]) {0, 25, 0}, VEC3_ZERO, 90.0f);
+    model_transform(g_world.skybox, (float[]) {0, 25, 0}, VEC3_ZERO, 130.0f);
     program_unistr_mat(g_skyboxProg, "u_model", g_world.skybox->mat);
 
     g_world.wallTex = texture_new("data/wall.png", GL_LINEAR, 1.0f);
@@ -67,8 +67,8 @@ void world_init() {
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    g_world.platforms = vector_new(10);
-
+    //platforms
+    g_world.platforms = vector_new(6);
 
     platform_t *plat = calloc(1, sizeof(platform_t));
     platform_init(plat, (vec3) {5, 20, 2});
@@ -91,9 +91,12 @@ void world_init() {
     }
     {
         platform_t *plat0 = calloc(1, sizeof(platform_t));
-        platform_copy(plat, plat0, (vec3) {0, 60, 0});
+        platform_copy(plat, plat0, (vec3) {0, 59, 0});
         vector_push(g_world.platforms, plat0);
     }
+
+    //jewel
+    jewel_init(&g_world.jewel, (vec3) {0, 60, 0});
 }
 
 void world_update() {
@@ -116,6 +119,8 @@ void world_update() {
             platform_update(p);
         }
     }
+
+    jewel_update(&g_world.jewel);
 }
 
 void world_render() {
@@ -153,6 +158,8 @@ void world_render() {
             platform_render(p);
         }
     }
+
+    jewel_render(&g_world.jewel);
 }
 
 void world_quit() {

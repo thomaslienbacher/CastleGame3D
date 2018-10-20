@@ -246,6 +246,12 @@
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/game.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/jewel.c">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/jewel.h">
+			<Option target="CastleGame3D"/>
+		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/main.c">
 			<Option target="CastleGame3D"/>
 		</Unit>
