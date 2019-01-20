@@ -26,9 +26,13 @@ typedef struct _physicsengine_s {
 extern physicsengine_t g_physicsengine;
 
 void physics_init();
+
 void physics_add_body(physicsbody_t *physicsbody);
+
 char physics_colliding(physicsbody_t *a, physicsbody_t *b);
+
 void physics_update();
+
 void physics_quit();
 
 #endif //CASTLEGAME3D_PHYSICS_H

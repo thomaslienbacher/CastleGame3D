@@ -18,6 +18,7 @@ extern camera_t *g_camera;
 extern lightengine_t *g_lightengine;
 
 void engine_init();
+
 void engine_quit();
 
 #endif //CASTLEGAME3D_ENGINE_H

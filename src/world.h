@@ -8,7 +8,7 @@
 #include <model.h>
 #include <vector.h>
 #include <text.h>
-#include "switch.h"
+#include "iswitch.h"
 #include "physics.h"
 #include "jewel.h"
 
@@ -40,8 +40,11 @@ typedef struct _world_s {
 extern world_t g_world;
 
 void world_init();
+
 void world_update();
+
 void world_render();
+
 void world_quit();
 
 #endif //CASTLEGAME3D_WORLD_H

@@ -7,7 +7,7 @@
 #include "world.h"
 #include "game.h"
 #include "engine.h"
-#include "switch.h"
+#include "iswitch.h"
 #include "platform.h"
 
 world_t g_world;
@@ -52,7 +52,7 @@ void world_init() {
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-8, 17+PLATFORM_HEIGHT, -8});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-8, 17 + PLATFORM_HEIGHT, -8});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
@@ -62,7 +62,7 @@ void world_init() {
     physics_add_body(&g_world.iswitches[i].body);
     i++;
 
-    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-2, 37+PLATFORM_HEIGHT, 7});
+    vec3_cpy(g_world.iswitches[i].body.pos, (vec3) {-2, 37 + PLATFORM_HEIGHT, 7});
     model_transform(g_world.iswitches[i].model, g_world.iswitches[i].body.pos, VEC3_ZERO, 1.0f);
     physics_add_body(&g_world.iswitches[i].body);
     i++;
@@ -100,21 +100,21 @@ void world_init() {
 }
 
 void world_update() {
-    if(iswitch_check(&g_world.iswitches[0])) {
+    if (iswitch_check(&g_world.iswitches[0])) {
         platform_animate(vector_get(g_world.platforms, 0), (vec3) {5, 6, 2});
     }
-    if(iswitch_check(&g_world.iswitches[1])) {
+    if (iswitch_check(&g_world.iswitches[1])) {
         platform_animate(vector_get(g_world.platforms, 0), (vec3) {-3, 27, -3});
     }
-    if(iswitch_check(&g_world.iswitches[2])) {
+    if (iswitch_check(&g_world.iswitches[2])) {
         platform_animate(vector_get(g_world.platforms, 0), (vec3) {0, 37, 7});
     }
-    if(iswitch_check(&g_world.iswitches[3])) {
+    if (iswitch_check(&g_world.iswitches[3])) {
         platform_animate(vector_get(g_world.platforms, 0), (vec3) {0, 50, 7});
     }
 
     for (int i = 0; i < g_world.platforms->size; ++i) {
-        platform_t *p = (platform_t *)vector_get(g_world.platforms, i);
+        platform_t *p = (platform_t *) vector_get(g_world.platforms, i);
         if (p) {
             platform_update(p);
         }
@@ -142,18 +142,21 @@ void world_render() {
     program_unistr_mat(g_commonProg, "u_model", g_world.floor->mat);
     program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {12.0f, 12.0f});
     render_model(g_world.floor);
-
-    static int frame = 0;
-    frame++;
-
-    //iswitches
     program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {1.0f, 1.0f});
+
+    for (int i = 0; i < g_world.platforms->size; ++i) {
+        platform_t *p = (platform_t *) vector_get(g_world.platforms, i);
+        if (p) {
+            platform_render(p);
+        }
+    }
+
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
         iswitch_render(&g_world.iswitches[i]);
     }
 
     for (int i = 0; i < g_world.platforms->size; ++i) {
-        platform_t *p = (platform_t *)vector_get(g_world.platforms, i);
+        platform_t *p = (platform_t *) vector_get(g_world.platforms, i);
         if (p) {
             platform_render(p);
         }
@@ -162,6 +165,7 @@ void world_render() {
     jewel_render(&g_world.jewel);
 }
 
+//TODO: free all resources
 void world_quit() {
     model_free(g_world.floor);
     mesh_free(g_world.floorMesh);

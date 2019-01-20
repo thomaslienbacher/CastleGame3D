@@ -21,14 +21,14 @@ void player_init() {
 }
 
 void player_control() {
-    lightengine_set(g_lightengine, g_player.lightId, (vec3){1.0f, 1.0f, 1.0f},
-                    (vec3){g_player.body.pos[0], g_player.body.pos[1]+PLAYER_HEIGHT, g_player.body.pos[2]}, 3.5f);
+    lightengine_set(g_lightengine, g_player.lightId, (vec3) {1.0f, 1.0f, 1.0f},
+                    (vec3) {g_player.body.pos[0], g_player.body.pos[1] + PLAYER_HEIGHT, g_player.body.pos[2]}, 3.5f);
 
     g_player.yaw += g_control.dmx * g_control.delta * PLAYER_LOOK_SPEED;
     g_player.pitch -= g_control.dmy * g_control.delta * PLAYER_LOOK_SPEED;
 
-    if(g_player.pitch > PLAYER_MAX_PITCH) g_player.pitch = PLAYER_MAX_PITCH;
-    if(g_player.pitch < -PLAYER_MAX_PITCH) g_player.pitch = -PLAYER_MAX_PITCH;
+    if (g_player.pitch > PLAYER_MAX_PITCH) g_player.pitch = PLAYER_MAX_PITCH;
+    if (g_player.pitch < -PLAYER_MAX_PITCH) g_player.pitch = -PLAYER_MAX_PITCH;
 
     vec2 move = {0};
 
@@ -38,7 +38,7 @@ void player_control() {
     move[1] += g_control.kb[SDL_SCANCODE_D];
 
 
-    if(g_control.kb[SDL_SCANCODE_SPACE] && !g_player.inair) {
+    if (g_control.kb[SDL_SCANCODE_SPACE] && !g_player.inair) {
         g_player.body.vel[1] = JUMP_STRENGTH;
         g_player.inair = 1;
     }

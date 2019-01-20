@@ -47,7 +47,7 @@ void physics_update() {
         char colliding = 0;
 
         //bodys
-        for (int i = 0; i < g_physicsengine.bodys->size; i++) {
+        for (unsigned int i = 0; i < g_physicsengine.bodys->size; i++) {
             physicsbody_t *b = (physicsbody_t *) vector_get(g_physicsengine.bodys, i);
             if (!b) continue;
 
@@ -59,24 +59,23 @@ void physics_update() {
 
         //response
         if (colliding) {
-            for (int i = 0; i < colliders->size; ++i) {
+            for (unsigned int i = 0; i < colliders->size; ++i) {
                 physicsbody_t *b = (physicsbody_t *) vector_get(colliders, i);
                 if (!b) continue;
 
                 vec2 tmp;
                 vec2 bpos2d = {b->pos[0], b->pos[2]};
-                vec2 ppos2d ={g_physicsengine.player->pos[0], g_physicsengine.player->pos[2]};
+                vec2 ppos2d = {g_physicsengine.player->pos[0], g_physicsengine.player->pos[2]};
                 vec2_sub(tmp, ppos2d, bpos2d);
 
                 //ontop
                 float dist = vec2_len(tmp);
                 if (dist < b->radius) {
 
-                    if(g_physicsengine.player->pos[1] > b->pos[1]){
+                    if (g_physicsengine.player->pos[1] > b->pos[1]) {
                         g_physicsengine.player->pos[1] = b->pos[1] + b->height + SPACING;
                         g_player.inair = 0;
-                    }
-                    else {
+                    } else {
                         g_physicsengine.player->pos[1] = b->pos[1] - g_physicsengine.player->height - SPACING;
                         g_player.inair = 1;
                     }

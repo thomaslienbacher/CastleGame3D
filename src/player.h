@@ -27,6 +27,7 @@ typedef struct _player_s {
 extern player_t g_player;
 
 void player_init();
+
 void player_control();
 
 #endif //CASTLEGAME3D_PLAYER_H

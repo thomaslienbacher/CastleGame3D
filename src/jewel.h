@@ -19,7 +19,9 @@ typedef struct _jewel_s {
 } jewel_t;
 
 void jewel_init(jewel_t *jewel, vec3 pos);
+
 void jewel_update(jewel_t *jewel);
+
 void jewel_render(jewel_t *jewel);
 
 #endif //CASTLEGAME3D_JEWEL_H

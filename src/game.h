@@ -13,8 +13,11 @@
 #define TITLE "Castle Jumping 3D"
 
 void game_init();
+
 void game_update();
+
 void game_render();
+
 void game_quit();
 
 

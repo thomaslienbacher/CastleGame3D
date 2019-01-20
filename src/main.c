@@ -4,9 +4,7 @@
 #include "game.h"
 #include "engine.h"
 
-#undef main
-
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
     settings_load("data/game.cfg");
 
     engine_init();
@@ -18,7 +16,7 @@ int main(int argc, char **argv) {
     while (g_display->running) {
         display_prepare(g_display, &g_control.delta, g_settings.renderScale);
 
-        if(firstFrame) {
+        if (firstFrame) {
             SDL_GetMouseState(NULL, NULL);//eat movement event
             firstFrame = 0;
             continue;
@@ -37,8 +35,7 @@ int main(int argc, char **argv) {
             g_control.dmx *= -1;
 
             game_update();
-        }
-        else {
+        } else {
             SDL_ShowCursor(SDL_TRUE);
             g_control.delta = g_control.dmx = g_control.dmy = 0;
             g_control.button = 0;

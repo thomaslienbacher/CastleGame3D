@@ -13,7 +13,8 @@ camera_t *g_camera;
 lightengine_t *g_lightengine;
 
 void engine_init() {
-    g_display = display_new(TITLE, g_settings.width, g_settings.height, g_settings.fullscreen, g_settings.renderScale, g_settings.vsync);
+    g_display = display_new(TITLE, g_settings.width, g_settings.height, g_settings.fullscreen, g_settings.renderScale,
+                            g_settings.vsync);
     display_set_icon(g_display, "data/icon.png");
 
     CLEAR_COLOR[0] = 0.7f;
@@ -27,7 +28,7 @@ void engine_init() {
     g_fontProg = program_new("data/font_vs.glsl", "data/font_fs.glsl");
 
     g_camera = camera_new(g_settings.fov, (float) g_display->width / g_display->height, 0.2f, 300.0f);
-    g_lightengine = lightengine_new(g_commonProg, NUM_ISWITCHES+1);
+    g_lightengine = lightengine_new(g_commonProg, NUM_ISWITCHES + 1);
 }
 
 void engine_quit() {

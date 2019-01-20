@@ -11,10 +11,10 @@
 				<Option working_dir="E:/Thomas/Repositories/CastleGame3D/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="CastleGame3D">
@@ -26,17 +26,18 @@
 				<Compiler>
 					<Add option="-DDEBUG_BUILD"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/include/SDL2"/>
+					<Add directory="C:/msys64/mingw64/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 CastleGame3D"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 CastleGame3D"/>
+					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="CastleGame3D/fast">
@@ -48,37 +49,38 @@
 				<Compiler>
 					<Add option="-DDEBUG_BUILD"/>
 					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/include/SDL2"/>
+					<Add directory="C:/msys64/mingw64/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 CastleGame3D/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 CastleGame3D/fast"/>
+					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="E:/Thomas/Repositories/CastleGame3D/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="E:/Thomas/Repositories/CastleGame3D/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="TEngine">
@@ -89,18 +91,18 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DDEBUG_BUILD"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/include/SDL2"/>
+					<Add directory="C:/msys64/mingw64/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine"/>
+					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="TEngine/fast">
@@ -111,18 +113,18 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DDEBUG_BUILD"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/sdl2/include"/>
-					<Add directory="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/dependencies/glew/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/include/SDL2"/>
+					<Add directory="C:/msys64/mingw64/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../include"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/include-fixed"/>
+					<Add directory="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.2.1/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 TEngine/fast"/>
+					<CompileFile command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/msys64/mingw64/bin/mingw32-make.exe -f &quot;E:/Thomas/Repositories/CastleGame3D/cmake-build-debug/dependencies/TEngine/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
@@ -213,9 +215,6 @@
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src/texture.h">
 			<Option target="TEngine"/>
 		</Unit>
-		<Unit filename="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src/tinyobj_loader_c.h">
-			<Option target="TEngine"/>
-		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/dependencies/TEngine/src/utils.c">
 			<Option target="TEngine"/>
 		</Unit>
@@ -244,6 +243,12 @@
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/game.h">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/iswitch.c">
+			<Option target="CastleGame3D"/>
+		</Unit>
+		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/iswitch.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/jewel.c">
@@ -277,12 +282,6 @@
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/settings.h">
-			<Option target="CastleGame3D"/>
-		</Unit>
-		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/switch.c">
-			<Option target="CastleGame3D"/>
-		</Unit>
-		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/switch.h">
 			<Option target="CastleGame3D"/>
 		</Unit>
 		<Unit filename="E:/Thomas/Repositories/CastleGame3D/src/world.c">

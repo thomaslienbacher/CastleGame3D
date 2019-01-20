@@ -36,7 +36,7 @@ void platform_animate(platform_t *platform, vec3 newPos) {
 void platform_update(platform_t *platform) {
     platform->time += g_control.delta;
 
-    if(platform->time < 7.0f) {
+    if (platform->time < 7.0f) {
         platform->body.pos[0] = mlinearf(platform->body.pos[0], platform->newPos[0], 1.1f * g_control.delta);
         platform->body.pos[1] = mlinearf(platform->body.pos[1], platform->newPos[1], 1.1f * g_control.delta);
         platform->body.pos[2] = mlinearf(platform->body.pos[2], platform->newPos[2], 1.1f * g_control.delta);
@@ -44,7 +44,7 @@ void platform_update(platform_t *platform) {
 }
 
 void platform_render(platform_t *platform) {
-    model_transform_as(platform->model, platform->body.pos, VEC3_ZERO, (vec3){3.0f, 1.0f, 3.0f});
+    model_transform_as(platform->model, platform->body.pos, VEC3_ZERO, (vec3) {3.0f, 1.0f, 3.0f});
     program_unistr_mat(g_commonProg, "u_model", platform->model->mat);
     render_model(platform->model);
 }
