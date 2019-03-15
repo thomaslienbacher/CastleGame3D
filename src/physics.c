@@ -100,8 +100,8 @@ void physics_update() {
             vec3_add(g_physicsengine.player->pos, g_physicsengine.player->pos, move);
         }
 
-        g_player.body.pos[0] = clampf(g_player.body.pos[0], -WORLD_SIZE + PLAYER_RADIUS, WORLD_SIZE - PLAYER_RADIUS);
-        g_player.body.pos[2] = clampf(g_player.body.pos[2], -WORLD_SIZE + PLAYER_RADIUS, WORLD_SIZE - PLAYER_RADIUS);
+        g_player.body.pos[0] = mclamp(g_player.body.pos[0], -WORLD_SIZE + PLAYER_RADIUS, WORLD_SIZE - PLAYER_RADIUS);
+        g_player.body.pos[2] = mclamp(g_player.body.pos[2], -WORLD_SIZE + PLAYER_RADIUS, WORLD_SIZE - PLAYER_RADIUS);
 
         vector_free(colliders);
     }

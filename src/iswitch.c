@@ -8,7 +8,7 @@
 #include "world.h"
 #include "player.h"
 
-void iswitch_init(iswitch_t *iswitch) {
+void iswitch_init(iswitch_t *iswitch, vec3 pos) {
     iswitch->texRed = texture_new("data/switch_red.png", GL_LINEAR, 1.0f);
     iswitch->texGreen = texture_new("data/switch_green.png", GL_LINEAR, 1.0f);
     iswitch->mesh = mesh_newobj("data/switch.obj");
@@ -18,14 +18,21 @@ void iswitch_init(iswitch_t *iswitch) {
     iswitch->lightId = lightengine_get_id(g_lightengine);
     iswitch->state = 0;
 
+    vec3_cpy(iswitch->body.pos, pos);
+    model_transform(iswitch->model, iswitch->body.pos, VEC3_ZERO, 1.0f);
+    physics_add_body(&iswitch->body);
+
     iswitch->body.height = 1.f;
     iswitch->body.radius = 0.6f;
 }
 
-void iswitch_copy(iswitch_t *src, iswitch_t *dst) {
+void iswitch_copy(iswitch_t *src, iswitch_t *dst, vec3 pos) {
     memcpy(dst, src, sizeof(iswitch_t));
     dst->model = model_new(src->mesh, src->texRed);
     dst->lightId = lightengine_get_id(g_lightengine);
+    vec3_cpy(dst->body.pos, pos);
+    model_transform(dst->model, dst->body.pos, VEC3_ZERO, 1.0f);
+    physics_add_body(&dst->body);
 }
 
 char iswitch_check(iswitch_t *iswitch) {

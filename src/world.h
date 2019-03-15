@@ -11,9 +11,11 @@
 #include "iswitch.h"
 #include "physics.h"
 #include "jewel.h"
+#include "platform.h"
 
 #define WORLD_SIZE 30.0f
 #define NUM_ISWITCHES 4
+#define NUM_PLATFORMS 5
 
 typedef struct _world_s {
     texture_t *floorTex;
@@ -29,7 +31,7 @@ typedef struct _world_s {
     mesh_t *wallMesh;
     model_t *wall;
 
-    vector_t *platforms;
+    platform_t platforms[NUM_PLATFORMS];
     iswitch_t iswitches[NUM_ISWITCHES];
 
     jewel_t jewel;
