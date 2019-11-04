@@ -7,11 +7,14 @@
 #include "engine.h"
 #include "world.h"
 #include "player.h"
+#include "game.h"
 
-void iswitch_init(iswitch_t *iswitch, vec3 pos) {
-    iswitch->texRed = texture_new("data/switch_red.png", GL_LINEAR, 1.0f);
-    iswitch->texGreen = texture_new("data/switch_green.png", GL_LINEAR, 1.0f);
-    iswitch->mesh = mesh_newobj("data/switch.obj");
+iswitch_t *iswitch_new(texture_t *texRed, texture_t *texGreen, mesh_t *mesh, vec3 pos) {
+    iswitch_t *iswitch = te_calloc(1, sizeof(iswitch_t));
+
+    iswitch->texRed = texRed;
+    iswitch->texGreen = texGreen;
+    iswitch->mesh = mesh;
     iswitch->model = model_new(iswitch->mesh, iswitch->texRed);
     iswitch->text = text_new(g_world.font, "Press F to activate");
     text_transform(iswitch->text, (vec2) {-iswitch->text->width / 2 * 0.8f, -0.7f}, 0.8f);
@@ -24,15 +27,8 @@ void iswitch_init(iswitch_t *iswitch, vec3 pos) {
 
     iswitch->body.height = 1.f;
     iswitch->body.radius = 0.6f;
-}
 
-void iswitch_copy(iswitch_t *src, iswitch_t *dst, vec3 pos) {
-    memcpy(dst, src, sizeof(iswitch_t));
-    dst->model = model_new(src->mesh, src->texRed);
-    dst->lightId = lightengine_get_id(g_lightengine);
-    vec3_cpy(dst->body.pos, pos);
-    model_transform(dst->model, dst->body.pos, VEC3_ZERO, 1.0f);
-    physics_add_body(&dst->body);
+    return iswitch;
 }
 
 char iswitch_check(iswitch_t *iswitch) {
@@ -77,4 +73,10 @@ void iswitch_render(iswitch_t *iswitch) {
         render_text(iswitch->text);
         glEnable(GL_DEPTH_TEST);
     }
+}
+
+void iswitch_free(iswitch_t *iswitch) {
+    text_free(iswitch->text);
+    model_free(iswitch->model);
+    te_free(iswitch);
 }

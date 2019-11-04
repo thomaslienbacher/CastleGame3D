@@ -2,12 +2,10 @@
 // Created by Thomas Lienbacher on 03.10.2018.
 //
 
-#include <stdio.h>
-#include <mem.h>
 #include <light.h>
 #include "player.h"
-#include "world.h"
 #include "engine.h"
+#include "game.h"
 
 player_t g_player;
 

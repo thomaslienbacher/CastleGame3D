@@ -31,10 +31,16 @@ typedef struct _world_s {
     mesh_t *wallMesh;
     model_t *wall;
 
-    platform_t platforms[NUM_PLATFORMS];
-    iswitch_t iswitches[NUM_ISWITCHES];
+    texture_t *platformTex;
+    mesh_t *platformMesh;
+    platform_t *platforms[NUM_PLATFORMS];
 
-    jewel_t jewel;
+    texture_t *iswitchRedTex;
+    texture_t *iswitchGreenTex;
+    mesh_t *iswitchMesh;
+    iswitch_t *iswitches[NUM_ISWITCHES];
+
+    jewel_t *jewel;
 
     font_t *font;
 } world_t;

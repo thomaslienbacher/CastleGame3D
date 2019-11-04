@@ -2,12 +2,10 @@
 // Created by Thomas Lienbacher on 18.10.2018.
 //
 
-#include <stdio.h>
-#include <utils.h>
 #include "physics.h"
-#include "defs.h"
 #include "player.h"
 #include "world.h"
+#include "game.h"
 
 physicsengine_t g_physicsengine;
 
@@ -47,7 +45,7 @@ void physics_update() {
         char colliding = 0;
 
         //bodys
-        for (unsigned int i = 0; i < g_physicsengine.bodys->size; i++) {
+        for (size_t i = 0; i < g_physicsengine.bodys->size; i++) {
             physicsbody_t *b = (physicsbody_t *) vector_get(g_physicsengine.bodys, i);
             if (!b) continue;
 
@@ -59,7 +57,7 @@ void physics_update() {
 
         //response
         if (colliding) {
-            for (unsigned int i = 0; i < colliders->size; ++i) {
+            for (size_t i = 0; i < colliders->size; ++i) {
                 physicsbody_t *b = (physicsbody_t *) vector_get(colliders, i);
                 if (!b) continue;
 

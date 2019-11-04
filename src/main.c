@@ -1,3 +1,4 @@
+#include <tengine_master.h>
 #include <display.h>
 #include "settings.h"
 #include "player.h"
@@ -48,6 +49,10 @@ int main(int argc, char *argv[]) {
 
     game_quit();
     engine_quit();
+
+#ifdef DEBUG_BUILD
+    te_check_allocations();
+#endif
 
     return 0;
 }

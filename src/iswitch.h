@@ -26,12 +26,12 @@ typedef struct _switch_s {
     int lightId;
 } iswitch_t;
 
-void iswitch_init(iswitch_t *iswitch, vec3 pos);
-
-void iswitch_copy(iswitch_t *src, iswitch_t *dst, vec3 pos);
+iswitch_t *iswitch_new(texture_t *texRed, texture_t *texGreen, mesh_t *mesh, vec3 pos);
 
 char iswitch_check(iswitch_t *iswitch);
 
 void iswitch_render(iswitch_t *iswitch);
+
+void iswitch_free(iswitch_t *iswitch);
 
 #endif //CASTLEGAME3D_INTERACTION_H

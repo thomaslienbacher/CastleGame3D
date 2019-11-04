@@ -6,6 +6,10 @@
 #include "game.h"
 #include "engine.h"
 #include "physics.h"
+#include "world.h"
+#include "player.h"
+
+struct control_s g_control;
 
 void game_init() {
     g_control.kb = SDL_GetKeyboardState(NULL);

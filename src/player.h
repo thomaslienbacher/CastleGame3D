@@ -7,7 +7,6 @@
 
 #include <tengine_math.h>
 #include <SDL2/SDL.h>
-#include "defs.h"
 #include "physics.h"
 
 #define PLAYER_SPEED 8.0f

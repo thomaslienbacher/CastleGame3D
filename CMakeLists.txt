@@ -15,7 +15,7 @@ endif ()
 
 add_subdirectory(dependencies/TEngine)
 
-set(SOURCE_FILES src/main.c src/settings.c src/settings.h src/player.c src/player.h src/defs.h src/game.c src/game.h src/world.c src/world.h src/engine.c src/engine.h src/defs.c src/iswitch.c src/iswitch.h src/physics.c src/physics.h src/platform.c src/platform.h src/jewel.c src/jewel.h)
+set(SOURCE_FILES src/main.c src/settings.c src/settings.h src/player.c src/player.h src/game.c src/game.h src/world.c src/world.h src/engine.c src/engine.h src/iswitch.c src/iswitch.h src/physics.c src/physics.h src/platform.c src/platform.h src/jewel.c src/jewel.h)
 add_executable(CastleGame3D ${SOURCE_FILES})
 
 target_include_directories(CastleGame3D PUBLIC ${DEPENDENCIES_DIR}TEngine/src/)

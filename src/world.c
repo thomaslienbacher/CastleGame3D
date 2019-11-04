@@ -37,41 +37,53 @@ void world_init() {
     g_world.font = font_new("data/consolas_32.csv", "data/consolas_32.png", FONT_DEFAULT_SCALAR);
 
     //switch
-    iswitch_init(&g_world.iswitches[0], (vec3) {0, 0, -3});
-    iswitch_copy(&g_world.iswitches[0], &g_world.iswitches[1], (vec3) {-8, 17 + PLATFORM_HEIGHT, -8});
-    iswitch_copy(&g_world.iswitches[0], &g_world.iswitches[2], (vec3) {10.5, 22, 10.5});
-    iswitch_copy(&g_world.iswitches[0], &g_world.iswitches[3], (vec3) {-2, 37 + PLATFORM_HEIGHT, 7});
+    g_world.iswitchRedTex = texture_new("data/switch_red.png", GL_LINEAR, 1.0f);;
+    g_world.iswitchGreenTex = texture_new("data/switch_green.png", GL_LINEAR, 1.0f);;
+    g_world.iswitchMesh = mesh_newobj("data/switch.obj");
+
+
+    g_world.iswitches[0] = iswitch_new(g_world.iswitchRedTex, g_world.iswitchGreenTex, g_world.iswitchMesh,
+                                       (vec3) {0, 0, -3});
+    g_world.iswitches[1] = iswitch_new(g_world.iswitchRedTex, g_world.iswitchGreenTex, g_world.iswitchMesh,
+                                       (vec3) {-8, 17 + PLATFORM_HEIGHT, -8});
+    g_world.iswitches[2] = iswitch_new(g_world.iswitchRedTex, g_world.iswitchGreenTex, g_world.iswitchMesh,
+                                       (vec3) {10.5f, 22, 10.5f});
+    g_world.iswitches[3] = iswitch_new(g_world.iswitchRedTex, g_world.iswitchGreenTex, g_world.iswitchMesh,
+                                       (vec3) {-2, 37 + PLATFORM_HEIGHT, 7});
 
     //platforms
-    platform_init(&g_world.platforms[0], (vec3) {5, 20, 2});
-    platform_copy(&g_world.platforms[0], &g_world.platforms[1], (vec3) {12, 13, -7});
-    platform_copy(&g_world.platforms[0], &g_world.platforms[2], (vec3) {12, 27, 12});
-    platform_copy(&g_world.platforms[0], &g_world.platforms[3], (vec3) {-8, 17, -8});
-    platform_copy(&g_world.platforms[0], &g_world.platforms[4], (vec3) {0, 59, 0});
+    g_world.platformTex = texture_new("data/platform.png", GL_LINEAR, 1.0f);
+    g_world.platformMesh = mesh_newobj("data/platform.obj");
+
+    g_world.platforms[0] = platform_new(g_world.platformTex, g_world.platformMesh, (vec3) {5, 20, 2});
+    g_world.platforms[1] = platform_new(g_world.platformTex, g_world.platformMesh, (vec3) {12, 13, -7});
+    g_world.platforms[2] = platform_new(g_world.platformTex, g_world.platformMesh, (vec3) {12, 27, 12});
+    g_world.platforms[3] = platform_new(g_world.platformTex, g_world.platformMesh, (vec3) {-8, 17, -8});
+    g_world.platforms[4] = platform_new(g_world.platformTex, g_world.platformMesh, (vec3) {0, 59, 0});
 
     //jewel
-    jewel_init(&g_world.jewel, (vec3) {0, 60, 0});
+    g_world.jewel = jewel_new((vec3) {0, 60, 0});
 }
 
 void world_update() {
-    if (iswitch_check(&g_world.iswitches[0])) {
-        platform_animate(&g_world.platforms[0], (vec3) {5, 6, 2});
+    if (iswitch_check(g_world.iswitches[0])) {
+        platform_animate(g_world.platforms[0], (vec3) {5, 6, 2});
     }
-    if (iswitch_check(&g_world.iswitches[1])) {
-        platform_animate(&g_world.platforms[0], (vec3) {-3, 27, -3});
+    if (iswitch_check(g_world.iswitches[1])) {
+        platform_animate(g_world.platforms[0], (vec3) {-3, 27, -3});
     }
-    if (iswitch_check(&g_world.iswitches[2])) {
-        platform_animate(&g_world.platforms[0], (vec3) {0, 37, 7});
+    if (iswitch_check(g_world.iswitches[2])) {
+        platform_animate(g_world.platforms[0], (vec3) {0, 37, 7});
     }
-    if (iswitch_check(&g_world.iswitches[3])) {
-        platform_animate(&g_world.platforms[0], (vec3) {0, 50, 7});
+    if (iswitch_check(g_world.iswitches[3])) {
+        platform_animate(g_world.platforms[0], (vec3) {0, 50, 7});
     }
 
     for (int i = 0; i < NUM_PLATFORMS; ++i) {
-        platform_update(&g_world.platforms[i]);
+        platform_update(g_world.platforms[i]);
     }
 
-    jewel_update(&g_world.jewel);
+    jewel_update(g_world.jewel);
 }
 
 void world_render() {
@@ -96,18 +108,34 @@ void world_render() {
     program_unistr_vec2(g_commonProg, "u_uvscale", (float[]) {1.0f, 1.0f});
 
     for (int i = 0; i < NUM_PLATFORMS; ++i) {
-        platform_render(&g_world.platforms[i]);
+        platform_render(g_world.platforms[i]);
     }
 
     for (int i = 0; i < NUM_ISWITCHES; ++i) {
-        iswitch_render(&g_world.iswitches[i]);
+        iswitch_render(g_world.iswitches[i]);
     }
 
-    jewel_render(&g_world.jewel);
+    jewel_render(g_world.jewel);
 }
 
-//TODO: free all resources
 void world_quit() {
+    jewel_free(g_world.jewel);
+
+    texture_free(g_world.platformTex);
+    mesh_free(g_world.platformMesh);
+    for (int i = 0; i < NUM_PLATFORMS; ++i) {
+        platform_free(g_world.platforms[i]);
+    }
+
+    texture_free(g_world.iswitchRedTex);
+    texture_free(g_world.iswitchGreenTex);
+    mesh_free(g_world.iswitchMesh);
+    for (int i = 0; i < NUM_ISWITCHES; ++i) {
+        iswitch_free(g_world.iswitches[i]);
+    }
+
+    font_free(g_world.font);
+
     model_free(g_world.floor);
     mesh_free(g_world.floorMesh);
     texture_free(g_world.floorTex);

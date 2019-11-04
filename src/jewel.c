@@ -5,10 +5,12 @@
 #include <render.h>
 #include "jewel.h"
 #include "engine.h"
-#include "defs.h"
 #include "player.h"
+#include "game.h"
 
-void jewel_init(jewel_t *jewel, vec3 pos) {
+jewel_t *jewel_new(vec3 pos) {
+    jewel_t *jewel = te_calloc(1, sizeof(jewel_t));
+
     jewel->tex = texture_new("data/jewel.png", GL_LINEAR, 1.0f);
     jewel->mesh = mesh_newobj("data/jewel.obj");
     jewel->model = model_new(jewel->mesh, jewel->tex);
@@ -16,6 +18,8 @@ void jewel_init(jewel_t *jewel, vec3 pos) {
     model_transform(jewel->model, pos, VEC3_ZERO, 1.3f);
     vec3_cpy(jewel->model->pos, pos);
     jewel->pickedUp = 0;
+
+    return jewel;
 }
 
 void jewel_update(jewel_t *jewel) {
@@ -37,4 +41,11 @@ void jewel_render(jewel_t *jewel) {
 
     program_unistr_mat(g_commonProg, "u_model", jewel->model->mat);
     render_model(jewel->model);
+}
+
+void jewel_free(jewel_t *jewel) {
+    model_free(jewel->model);
+    texture_free(jewel->tex);
+    mesh_free(jewel->mesh);
+    te_free(jewel);
 }
